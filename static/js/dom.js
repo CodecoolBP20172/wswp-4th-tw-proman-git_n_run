@@ -8,15 +8,47 @@ dom = {
         <div class="header">
             <div class="title">Proman</div>
             <div class="new_board_button">
-                <button onclick="dom.addBoard()">Create board</button>
+                <button id="board_creator">Create board</button>
             </div>
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            Please, provide a name if the new board!
+            <form onSubmit='dom.addBoard(this); return false'>        
+                <input type="text" id="input_title" name="firstname"></input>        
+            </form>
+          </div>
+      
+        </div>
         `
         target.appendChild(newdiv);
+                // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // Get the button that opens the modal
+        var button = document.getElementById("board_creator");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        button.onclick = function() {
+        modal.style.display = "block";
+        }
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
         target = document.getElementById("wrapper")
         newdiv = document.createElement("div");
         tablelist = dataHandler.getBoards();
         for (let i= 0; i < tablelist.length; i++){
-            console.log("asd")
             newdiv.innerHTML += `<div class="board" id="board${tablelist[i].id}">
                                 <div class="board_title">${tablelist[i].title}</div>
                                 <div onclick="dom.showCards()" class="dropdown_button">Dropdown button
@@ -71,10 +103,23 @@ dom = {
         // it adds necessary event listeners also
     },
     addBoard: function() {
+        document.getElementById('myModal').style.display = "none";
         var target = document.getElementById("wrapper")
         var newdiv = document.createElement("div")
-        newdiv.innerHTML = `<div class="board"><div class="board_title">Board title</div><div onclick="dom.showCards()" class="dropdown_button">Dropdown button</div></div>`
+        newdiv.innerHTML = `<div class="board">
+                            <div class="board_title">
+                            ${document.getElementById('input_title').value}
+                            </div>
+                            <div onclick="dom.showCards()" class="dropdown_button">
+                            Dropdown button
+                            </div>
+                            </div>`
         target.appendChild(newdiv)
+        document.getElementById('input_title').value = ""
     }
+
     // here comes more features
 }   
+
+
+
