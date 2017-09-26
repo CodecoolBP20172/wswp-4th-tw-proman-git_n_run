@@ -16,7 +16,7 @@ dom = {
         // loads and shows boards appending them to #boards div
         // it adds necessary event listeners also
     },
-    showCards: function(boardId) {
+    showCards: function(boardId) { 0
         // loads and shows the cards of a board
         // it adds necessary event listeners also
     },
