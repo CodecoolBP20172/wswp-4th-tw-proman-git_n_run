@@ -19,22 +19,23 @@ dom = {
         tablelist = dataHandler.getBoards();
         for (let i= 0; i < tablelist.length; i++){
             console.log("asd")
-            newdiv.innerHTML += `<div class="board" id="board${tablelist[i].id}"><div class="board_title">${tablelist[i].title}</div><div class="dropdown_button">Dropdown button</div></div>`
+            newdiv.innerHTML += `<div class="board" id="board${tablelist[i].id}"><div class="board_title">${tablelist[i].title}</div><div onclick="dom.showCards()" class="dropdown_button">Dropdown button</div></div>`
         }
         target.appendChild(newdiv)
         // loads and shows boards appending them to #boards div
         // it adds necessary event listeners also
     },
     showCards: function(boardId) {
-        var dropdown_button = document.getElementsByClassName("dropdown_button")
-        dropdown_button.addEventListener("click", showCards)
+        alert("ShowTime!!!");
+        var dropdown_button = document.getElementsByClassName("dropdown_button");
+        dropdown_button.addEventListener("click", showCards);
 
-        var parent = document.getElementById("body_id")
-        var child = document.getElementsByClassName("wrapper")
-        parent.removeChild(child)
+        var parent = document.getElementById("body_id");
+        var child = document.getElementsByClassName("wrapper");
+        parent.removeChild(child);
 
-        var target = document.getElementById("body_id")
-        var newDiv = document.createElement("div")
+        var target = document.getElementById("body_id");
+        var newDiv = document.createElement("div");
         newDiv.innerHTML = 
         `<div name="field_new" id="field_new" class="field"> 
                 <div name="status_new" id="status_new" class="status"> New </div>
@@ -60,8 +61,8 @@ dom = {
                     <div name="task_done" id= "task_done" class="task_done"> Task1 </div>
                 </div>
             </div>
-            `
-
+            `;
+        
 
         // loads and shows the cards of a board
         // it adds necessary event listeners also
@@ -69,7 +70,7 @@ dom = {
     addBoard: function() {
         var target = document.getElementById("wrapper")
         var newdiv = document.createElement("div")
-        newdiv.innerHTML = `<div class="board"><div class="board_title">Board title</div><div class="dropdown_button">Dropdown button</div></div>`
+        newdiv.innerHTML = `<div class="board"><div class="board_title">Board title</div><div onclick="dom.showCards()" class="dropdown_button">Dropdown button</div></div>`
         target.appendChild(newdiv)
     }
     // here comes more features
