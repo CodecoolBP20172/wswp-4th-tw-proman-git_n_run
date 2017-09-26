@@ -2,6 +2,7 @@
 dom = { 
     showBoards: function() {
         var target = document.getElementById("body_id");
+        target.innerHTML = ""
         var newdiv = document.createElement("div");
         newdiv.innerHTML = `
         <div class="wrapper" id="wrapper">
@@ -14,7 +15,7 @@ dom = {
           <div class="modal-content">
             <span class="close">&times;</span>
             Please, provide a name if the new board!
-            <form onSubmit='dom.addBoard(this); return false'>        
+            <form onSubmit='dom.addBoard(this); return false' action="/#">        
                 <input type="text" id="input_title" name="firstname"></input>        
             </form>
           </div>
@@ -104,18 +105,9 @@ dom = {
     },
     addBoard: function() {
         document.getElementById('myModal').style.display = "none";
-        var target = document.getElementById("wrapper")
-        var newdiv = document.createElement("div")
-        newdiv.innerHTML = `<div class="board">
-                            <div class="board_title">
-                            ${document.getElementById('input_title').value}
-                            </div>
-                            <div onclick="dom.showCards()" class="dropdown_button">
-                            Dropdown button
-                            </div>
-                            </div>`
-        target.appendChild(newdiv)
-        document.getElementById('input_title').value = ""
+        dataHandler.createNewBoard(document.getElementById('input_title').value);
+
+        this.showBoards()
     }
 
     // here comes more features
