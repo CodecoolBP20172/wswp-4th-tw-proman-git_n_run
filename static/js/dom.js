@@ -3,7 +3,7 @@ dom = {
     showBoards: function() {
         var target = document.getElementById("body_id");
         var newdiv = document.createElement("div");
-        newdiv. innerHTML = `
+        newdiv.innerHTML = `
         <div class="wrapper" id="wrapper">
         <div class="header">
             <div class="title">Proman</div>
@@ -14,6 +14,14 @@ dom = {
         </div>
         `
         target.appendChild(newdiv);
+        target = document.getElementById("wrapper")
+        newdiv = document.createElement("div");
+        tablelist = dataHandler.getBoards();
+        for (let i= 0; i < tablelist.length; i++){
+            console.log("asd")
+            newdiv.innerHTML += `<div class="board" id="board${tablelist[i].id}"><div class="board_title">${tablelist[i].title}</div><div class="dropdown_button">Dropdown button</div></div>`
+        }
+        target.appendChild(newdiv)
         // loads and shows boards appending them to #boards div
         // it adds necessary event listeners also
     },
