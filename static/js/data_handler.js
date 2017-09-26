@@ -13,7 +13,7 @@ dataHandler = {
     },
 
     loadData: function() {
-        this.data = JSON.parse(localStorage.getItem('data'))
+        return this.data = JSON.parse(localStorage.getItem('data'))
         // loads data from local storage to this.data property
         // this.data = ...
     },
@@ -53,16 +53,57 @@ dataHandler = {
     },
 
     getCardsByBoardId: function(boardId) {
+        this.loadData();
+        var cardList = []
+        for (var i = 0; i < this.data.cards.length; i++){
+            if (this.data.cards[i].board_id === boardId){
+                cardList.push(this.data.cards[i])
+            }
+        }
+        return cardList
         // returns the cards from this.data which has the given board id
     },
     getCard: function(cardId) {
+        this.loadData();
+        for (var i = 0; i < this.data.cards.length; i++){
+            if (this.data.cards[i].id === cardId){
+                return this.data.cards[i]
+            }
+        }
         // returns the card with the given id from this.data
     },
     createNewBoard: function(boardTitle) {
+        this.loadData();
+        var maximumId
+        for (var i = 0; i < this.data.boards.length; i++){
+            if(this.data.boards[i].id > maximumId){
+                maximumId = this.data.boards[i].id
+            }
+        }
+        this.data.boards.push({
+            'id': maximumId,
+            'title':boardTitle
+        });y
+        this.saveData();
         // creates new board, saves it and returns its id
     },
     createNewCard: function(cardTitle, boardId, statusId) {
+        this.loadData();
+        var maximumId
+        for (var i = 0; i < this.data.cards.length; i++){
+            if(this.data.cards[i].id > maximumId){
+                maximumId = this.data.boards[i].id
+            }
+        }
+        this.data.cards.push({
+            'board_id': boardId,
+            'id': maximumId,
+            'status_id':statusId,
+            'title':cardTitle
+        });
+        this.saveData();
+        // creates new board, saves it and returns its id
+    },
         // creates new card for the given board, saves it and returns its id
     }
     // here comes more features
-}
