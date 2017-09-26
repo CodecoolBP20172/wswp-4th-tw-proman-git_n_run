@@ -1,3 +1,32 @@
+#boards {
+    background-color: green;
+     
+}
+
+.field {
+    background-color: red;
+    height: 540px;
+}
+
+.status {
+    background-color: blue;
+    height: 100px;
+    margin: 10px 10px 10px 10px;
+}
+
+.task_area {
+    background-color: orange;
+    height: 300px;
+    padding: 50px;
+    margin: 10px 10px 10px 10px;
+    
+}
+
+
+.task {
+    background-color: green;
+}
+
 div {
     border: 1px solid black;
 
