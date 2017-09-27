@@ -19,8 +19,10 @@ dom = {
             console.log("asd")
             newdiv.innerHTML += `<div class="board" id="board${tablelist[i].id}">
                                 <div class="board_title">${tablelist[i].title}</div>
-                                <div onclick="dom.showCards()" class="dropdown_button">Dropdown button
+                                <div onclick="dom.showCards(${tablelist[i].id})" class="dropdown_button">Dropdown button
                                 </div>
+
+
                                 </div>`
         target.appendChild(newdiv)
         // loads and shows boards appending them to #boards div
@@ -30,16 +32,15 @@ dom = {
 
 
     showCards: function(boardId) {
-        alert("ShowTime!!!");
-        var dropdown_button = document.getElementsByClassName("dropdown_button");
-        dropdown_button.addEventListener("click", showCards);
+        //var dropdownButton = document.getElementsByClassName("dropdown_button");
+        //dropdownButton.addEventListener("click", showCards);
 
-        var parent = document.getElementById("body_id");
-        var child = document.getElementsByClassName("wrapper");
-        parent.removeChild(child);
 
-        var target = document.getElementById("body_id");
+        var target = document.getElementById("board"+boardId);
         var newDiv = document.createElement("div");
+
+        cardList = dataHandler.getCardsByBoardId();
+
         newDiv.innerHTML = 
         `<div name="field_new" id="field_new" class="field"> 
                 <div name="status_new" id="status_new" class="status"> New </div>
@@ -66,15 +67,19 @@ dom = {
                 </div>
             </div>
             `;
+         target.appendChild(newDiv);
+        
+        
+           
     
         // loads and shows the cards of a board
         // it adds necessary event listeners also
     },
     addBoard: function() {
-        var target = document.getElementById("wrapper")
-        var newdiv = document.createElement("div")
-        newdiv.innerHTML = `<div class="board"><div class="board_title">Board title</div><div onclick="dom.showCards()" class="dropdown_button">Dropdown button</div></div>`
-        target.appendChild(newdiv)
+        var target = document.getElementById("wrapper");
+        var newdiv = document.createElement("div");
+        newdiv.innerHTML = `<div class="board"><div class="board_title">Board title</div><div onclick="dom.showCards()" class="dropdown_button">Dropdown button</div></div>`;
+        target.appendChild(newdiv);
     }
     // here comes more features
 }   

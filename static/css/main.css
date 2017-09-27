@@ -77,3 +77,19 @@ div {
 .proba {
     color: red;
 }
+
+
+
+.mytable { 
+	display: table; 
+
+}
+
+.myrow { 
+	display: table-row;
+
+}
+
+.mycolumn { 
+    display: table-cell; 
+}
