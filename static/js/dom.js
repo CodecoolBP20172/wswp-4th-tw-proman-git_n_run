@@ -105,7 +105,7 @@ dom = {
     				if (cardList[card_id].status_id == target.id.slice(-1)) {
     					target.innerHTML += ` <div data-cardid="${cardList[card_id].id}"
                                                 data-cardboard ="${cardList[card_id].board_id}"
-                                                id = "card${cardList[card_id].id}" ondblclick = "dom.sayhello(${cardList[card_id].id})" > ${cardList[card_id].title} </div>`
+                                                id = "card${cardList[card_id].id}" ondblclick = "dom.editCard(${cardList[card_id].id})" > ${cardList[card_id].title} </div>`
     				}
     			}
     		}
@@ -147,8 +147,10 @@ dom = {
     },
        addNewCard: function(boardId) {
        dataHandler.createNewCard("newtask", boardId, 1)
+       this.showCards(boardId)
+       this.showCards(boardId)
     },
-    sayhello: function(cardId) {
+    editCard: function(cardId) {
                         currentcard = event.target
     					var modalContent = document.getElementsByClassName('modal-content')[0]
     					modalContent.innerHTML = `<h1>Editing</h1><input id="edit_input"></input><button id="send">Edit</button>`
