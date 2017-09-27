@@ -63,7 +63,7 @@ dom = {
     	var target = document.getElementById("board" + boardId);
 
     	var isBoardOpened = false;
-    	for (var i = 0; i < target.children.length; i++) { //checking children of target
+    	for (let i = 0; i < target.children.length; i++) { //checking children of target
     		if (target.children[i].dataset.table == "true") {
     			isBoardOpened = true; //if board_table is found the dropdown is opened
     		}
@@ -103,25 +103,9 @@ dom = {
     			for (let card_id = 0; card_id < cardList.length; card_id++) {
     				newcard.innerHTML = cardList[card_id].title //<div>title</div>
     				if (cardList[card_id].status_id == target.id.slice(-1)) {
-    					target.innerHTML += ` <div data-cardid="${cardList[card_id].id}" data-card-board ="${cardList[card_id].board_id}">
-                    ${cardList[card_id].title}
-                    </div>`
-    					target.addEventListener('dblclick', function(event) {
-    						var modalContent = document.getElementsByClassName('modal-content')[0]
-    						modalContent.innerHTML = `<h1>Editing</h1><input id="edit_input"></input><button id="send">asd</button>`
-    						var modal = document.getElementById('myModal');
-    						var span = document.getElementsByClassName("close")[0];
-    						modal.style.display = "block";
-    						var cardId = event.target.dataset.cardid
-    						document.getElementById("send").onclick = function() {
-    							modal.style.display = "none";
-    							dataHandler.getCard(parseInt(cardId)).title = document.getElementById('edit_input').value
-    							dataHandler.saveData();
-    							console.log("asd");
-    							dom.showCards(1);
-    							dom.showCards(1);
-    						}
-    					})
+    					target.innerHTML += ` <div data-cardid="${cardList[card_id].id}"
+                                                data-cardboard ="${cardList[card_id].board_id}"
+                                                id = "card${cardList[card_id].id}" ondblclick = "dom.sayhello(${cardList[card_id].id})" > ${cardList[card_id].title} </div>`
     				}
     			}
     		}
@@ -130,7 +114,7 @@ dom = {
     		target = document.getElementById("board" + boardId);
     		var divForCreateButton = document.createElement("div"); //create a button to make a new task
     		divForCreateButton.setAttribute("data-create_button", "true");
-    		divForCreateButton.innerHTML = `<button onclick="dom.addNewCard()">Create new task</button>`;
+    		divForCreateButton.innerHTML = `<button onclick="dom.addNewCard(${boardId})">Create new task</button>`;
     		target.appendChild(divForCreateButton);
     	} else {
     		var target = document.getElementById("board" + boardId);
@@ -154,16 +138,30 @@ dom = {
 
     },
 
-    
+
     addBoard: function() {
         document.getElementById('myModal').style.display = "none";
         dataHandler.createNewBoard(document.getElementById('input_title').value);
 
         this.showBoards();
     },
-       addNewCard: function() {
-        //here comes the function
-    }
-
+       addNewCard: function(boardId) {
+       dataHandler.createNewCard("newtask", boardId, 1)
+    },
+    sayhello: function(cardId) {
+                        currentcard = event.target
+    					var modalContent = document.getElementsByClassName('modal-content')[0]
+    					modalContent.innerHTML = `<h1>Editing</h1><input id="edit_input"></input><button id="send">Edit</button>`
+    					var modal = document.getElementById('myModal');
+    					var span = document.getElementsByClassName("close")[0];
+    					modal.style.display = "block";
+    					document.getElementById("send").onclick = function() {
+    						modal.style.display = "none";
+                            var changedTitle = document.getElementById('edit_input').value
+    						dataHandler.getCard(parseInt(cardId)).title = changedTitle
+    						dataHandler.saveData();
+                            document.getElementById(`card${cardId}`).innerHTML = changedTitle
+    						}
+    					}
     // here comes more features
 }  

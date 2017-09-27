@@ -90,15 +90,16 @@ dataHandler = {
     },
     createNewCard: function(cardTitle, boardId, statusId) {
         this.loadData();
-        var maximumId
-        for (var i = 0; i < this.data.cards.length; i++){
+        var maximumId = 0
+        for (let i = 0; i < this.data.cards.length; i++){
             if(this.data.cards[i].id > maximumId){
-                maximumId = this.data.boards[i].id
+                console.log(maximumId)
+                maximumId = this.data.cards[i].id
             }
         }
         this.data.cards.push({
             'board_id': boardId,
-            'id': maximumId,
+            'id': maximumId + 1,
             'status_id':statusId,
             'title':cardTitle
         });
