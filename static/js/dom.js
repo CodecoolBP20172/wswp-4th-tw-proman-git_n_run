@@ -79,27 +79,33 @@ dom = {
 
         `
         <div class="row_board"><div name="field_new" id="field_new" class="field"> 
-                <div name="status_new" id="status_new" class="status"> New </div>
+                <div name="status_new" id="status_new" class="status"> New 
                 <div name="area_new" id="area_new" class="area"> 
                     <div name="task_new" id="task_new" class="task"> Task1 </div>
+                    <div name="task_new" id="task_new" class="task"> Task2 </div>
+                    <div name="task_new" id="task_new" class="task"> Task3 </div>
+                </div>
                 </div>
             </div>
             <div name="field_progress" id="field_progress" class="field">
-                <div name="status_progress" id="status_progress" class="status"> In Progress </div>
+                <div name="status_progress" id="status_progress" class="status"> In Progress 
                 <div name="area_progress" id="area_progress" class="area"> 
                     <div name="task_progress" id="task_progress" class="task"> Task1 </div>
+                    </div>
                 </div>
             </div>
             <div name="field_testing" id="field_testing" class="field">
-                <div name="status_testing" id="status_testing" class="status"> Testing </div>
+                <div name="status_testing" id="status_testing" class="status"> Testing 
                 <div name="area_testing" id="area_testing" class="area"> 
                     <div name="task_testing" id="task_testing" class="task"> Task1 </div>
                 </div>
+                </div>
             </div>
             <div name="field_done" id="field_done" class="field">
-                <div name="status_done" id="status_done" class="status"> Done </div>
+                <div name="status_done" id="status_done" class="status"> Done 
                 <div name="area_done" id="area_done" class="area"> 
                     <div name="task_done" id= "task_done" class="task"> Task1 </div>
+                </div>
                 </div>
             </div>
             </div>
