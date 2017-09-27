@@ -80,38 +80,45 @@ dom = {
         `
         <div class="row_board"><div name="field_new" id="field_new" class="field"> 
                 <div name="status_new" id="status_new" class="status"> New 
-                <div name="area_new" id="area_new" class="area"> 
-                    <div name="task_new" id="task_new" class="task"> Task1 </div>
-                    <div name="task_new" id="task_new" class="task"> Task2 </div>
-                    <div name="task_new" id="task_new" class="task"> Task3 </div>
+                <div name="area_new" id="${boardId}status_id1" class="area">
                 </div>
                 </div>
             </div>
             <div name="field_progress" id="field_progress" class="field">
                 <div name="status_progress" id="status_progress" class="status"> In Progress 
-                <div name="area_progress" id="area_progress" class="area"> 
-                    <div name="task_progress" id="task_progress" class="task"> Task1 </div>
+                <div name="area_progress" id="${boardId}status_id2" class="area"> 
                     </div>
                 </div>
             </div>
             <div name="field_testing" id="field_testing" class="field">
                 <div name="status_testing" id="status_testing" class="status"> Testing 
-                <div name="area_testing" id="area_testing" class="area"> 
-                    <div name="task_testing" id="task_testing" class="task"> Task1 </div>
-                </div>
+                <div name="area_testing" id="${boardId}status_id3" class="area"> 
+                    </div>
                 </div>
             </div>
             <div name="field_done" id="field_done" class="field">
                 <div name="status_done" id="status_done" class="status"> Done 
-                <div name="area_done" id="area_done" class="area"> 
-                    <div name="task_done" id= "task_done" class="task"> Task1 </div>
+                <div name="area_done" id="${boardId}status_id4" class="area"> 
                 </div>
                 </div>
             </div>
-            </div>
+        </div>
             `;
-         target.appendChild(newDiv);
-        
+        target.appendChild(newDiv);
+
+        cardList= dataHandler.getCardsByBoardId(boardId);
+        console.log(cardList);
+        newcard = document.createElement("div");
+        for(let statusid = 1; statusid < 5; statusid ++ ){
+            target = document.getElementById(boardId+"status_id" + statusid)
+            for (let card_id = 0; card_id < cardList.length; card_id ++){
+                newcard.innerHTML = cardList[card_id].title//<div>title</div>
+                console.log(newcard.innerHTML)
+                if(cardList[card_id].status_id == target.id.slice(-1)){
+                target.innerHTML += ` <div>${cardList[card_id].title}</div>`
+                }
+            }
+        }
         
            
     
