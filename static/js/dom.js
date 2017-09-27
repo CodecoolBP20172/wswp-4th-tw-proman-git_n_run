@@ -65,11 +65,10 @@ dom = {
 
 
     showCards: function(boardId) {
-        //var dropdownButton = document.getElementsByClassName("dropdown_button");
-        //dropdownButton.addEventListener("click", showCards);
-
 
         var target = document.getElementById("board"+boardId);
+
+        if (target.children.length==2) {
         var newDiv = document.createElement("div");
         newDiv.setAttribute("class", "board_table");
 
@@ -124,6 +123,14 @@ dom = {
     
         // loads and shows the cards of a board
         // it adds necessary event listeners also
+        }
+    else {
+        for (var i = 0; i < target.children.length; i++) {
+            if (target.children[i].className=="board_table"){
+                target.removeChild(target.children[i]);
+            }
+        }
+    }
     },
     addBoard: function() {
         document.getElementById('myModal').style.display = "none";
