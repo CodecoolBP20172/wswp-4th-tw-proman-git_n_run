@@ -5,11 +5,11 @@ dom = {
         target.innerHTML = ""
         var newdiv = document.createElement("div");
         newdiv.innerHTML = `
-        <div class="wrapper" id="wrapper">
-        <div class="header">
-            <div class="title">Proman</div>
-            <div class="new_board_button">
-                <button id="board_creator">Create board</button>
+        <div class="container" id="wrapper">
+        <div class="row" id="header">
+            <div class="col" id="title">Proman</div>
+            <div class="col">
+                <button class="btn btn-dark" id="board_creator">Create board</button>
             </div>
         <div id="myModal" class="modal">
           <div class="modal-content">
@@ -50,9 +50,9 @@ dom = {
         newdiv = document.createElement("div");
         tablelist = dataHandler.getBoards();
         for (let i= 0; i < tablelist.length; i++){
-            newdiv.innerHTML += `<div class="board" id="board${tablelist[i].id}">
-                                <div class="board_title">${tablelist[i].title}</div>
-                                <div onclick="dom.showCards()" class="dropdown_button">Dropdown button
+            newdiv.innerHTML += `<div class="row board_row" id="board${tablelist[i].id}">
+                                <div class="col">${tablelist[i].title}</div>
+                                <div onclick="dom.showCards()" class="col">Dropdown button
                                 </div>
                                 </div>`
         target.appendChild(newdiv)
@@ -68,7 +68,7 @@ dom = {
         dropdown_button.addEventListener("click", showCards);
 
         var parent = document.getElementById("body_id");
-        var child = document.getElementsByClassName("wrapper");
+        var child = document.getElementsByClassName("container");
         parent.removeChild(child);
 
         var target = document.getElementById("body_id");

@@ -1,6 +1,34 @@
+body {
+    background: #FFF9EB;
+    font-family: Tahoma;
+}
+
+#wrapper {
+    margin-top: 3%;
+}
+
+.board_row {
+    background: #979797;
+    margin: 2% 0% 2% 0%;
+    padding: 1.5% 0% 1.5% 0%;
+    border-style: solid;
+    border-radius: 15px 15px 0px 0px;
+}
+
+#title {
+    font-family: "Bookman Old Style";
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 3px grey;
+}
+
+#board_creator {
+    float: right;
+}
+
 #boards {
-    background-color: green;
-     
+    background-color: #FFFBEB;
 }
 
 .field {
@@ -27,23 +55,6 @@
     background-color: green;
 }
 
-div {
-    border: 1px solid black;
-
-}
-.body_class {
-    background: grey;
-    height: 1080px;
-}
-.wrapper {
-    margin: 50px 100px 50px 100px;
-    background: white;
-    height: 900px;
-}
-.header {
-    height: 30px;
-    background: green;
-}
 .title {
     background: yellow;
     display: inline;
