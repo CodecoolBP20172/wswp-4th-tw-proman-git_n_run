@@ -74,16 +74,17 @@ dataHandler = {
     },
     createNewBoard: function(boardTitle) {
         this.loadData();
-        var maximumId
+        var maximumId = 0
         for (var i = 0; i < this.data.boards.length; i++){
+            console.log(this.data.boards[i])
             if(this.data.boards[i].id > maximumId){
                 maximumId = this.data.boards[i].id
             }
         }
         this.data.boards.push({
-            'id': maximumId,
+            'id': maximumId + 1,
             'title':boardTitle
-        });y
+        });
         this.saveData();
         // creates new board, saves it and returns its id
     },
