@@ -1,95 +1,92 @@
-#boards {
-    background-color: green;
-     
+body {
+    background: #222222;
+    font-family: Tahoma;
 }
 
-.field {
-    background-color: red;
-    height: 100px;
+#wrapper {
+    margin-top: 3%;
 }
 
-.status {
-    background-color: blue;
-    height: 100px;
-    margin: 10px 10px 10px 10px;
+#header {
+    align-items: center;
+}
+#title {
+    text-shadow: 1px 0px 40px #FF9718;
+	color: #FF9718;
+    font-family: "Bookman Old Style";
+    font-size: 2.5em;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-.task_area {
-    background-color: orange;
-    height: 300px;
-    padding: 50px;
-    margin: 10px 10px 10px 10px;
-    
+div[board] {
+    background: #FF9718;
+    margin: 2% 0% 2% 0%;
+    border-radius: 15px 15px 15px 15px;
 }
 
-
-.task {
-    background-color: green;
-}
-
-div {
-    border: 1px solid black;
-
-}
-.body_class {
-    background: grey;
-    height: 1080px;
-}
-.wrapper {
-    margin: 50px 100px 50px 100px;
-    background: white;
-    height: 900px;
-}
-.header {
-    height: 30px;
-    background: green;
-}
-.title {
-    background: yellow;
-    display: inline;
-    width: 45%;
-    float: left;
-}
-.new_board_button {
-    background: brown;
-    display: inline;
+#board_creator {
+    color: #FF9718;
+    background: #222;
+    border-width: 2px;
+    border-color: #FF9718;
     float: right;
-    width: 45%;
-}
-.board {
-    margin-top: 20px;
-    marker-end: 20px;
-    background: #3E3EA7;
-}
-.board_title {
-    background: fuchsia;
-    display: inline;
-    float: left;
-    width: 50%;
-}
-.dropdown_button {
-    background: #19D898;
-    display: inline;
-    float: right;
-    width: 49%;
-}
-.proba {
-    color: red;
 }
 
-
-
-.board_table { 
-    display: table; 
-    width: 100%;
-
+#board_title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    vertical-align: center;
 }
 
-.row_board { 
-	display: table-row;
-
+#drop_down_button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: right;
 }
 
-.field { 
-    display: table-cell; 
+#status_new {
+    border-style: dotted;
+    margin: 1% 1% 1% 2%;
+    text-align: center;
+    font-weight: bold;
+}
+
+#status_progress, #status_testing {
+    border-style: dotted;
+    margin: 1% 1% 1% 1%;
+    text-align: center;
+    font-weight: bold;
+}
+
+#status_done {
+    border-style: dotted;
+    margin: 1% 2% 1% 1%;
+    text-align: center;
+    font-weight: bold;
+}
+
+div[area_new] {
+    border-style: dashed;
+    margin: 1% 1% 1% 2%;
+}
+
+div[area_progress], div[area_testing] {
+    border-style: dashed;
+    margin: 1% 1% 1% 1%;
+}
+
+div[area_done] {
+    border-style: dashed;
+    margin: 1% 2% 1% 1%;
+}
+
+#card {
+    background: #5E5E5E;
+    margin: 6% 0% 6% 0%;
+    border-radius: 4px 10px 4px 10px;
+    color: rgb(255, 214, 168);
 }
