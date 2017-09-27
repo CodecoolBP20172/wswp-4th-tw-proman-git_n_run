@@ -5,7 +5,7 @@
 
 .field {
     background-color: red;
-    height: 540px;
+    height: 100px;
 }
 
 .status {
@@ -60,20 +60,36 @@ div {
     margin-top: 20px;
     marker-end: 20px;
     background: #3E3EA7;
-    height: 30px;
 }
 .board_title {
     background: fuchsia;
     display: inline;
     float: left;
-    width: 45%;
+    width: 50%;
 }
 .dropdown_button {
     background: #19D898;
     display: inline;
     float: right;
-    width: 45%;
+    width: 49%;
 }
 .proba {
     color: red;
+}
+
+
+
+.board_table { 
+    display: table; 
+    width: 100%;
+
+}
+
+.row_board { 
+	display: table-row;
+
+}
+
+.field { 
+    display: table-cell; 
 }
