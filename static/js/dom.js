@@ -71,11 +71,14 @@ dom = {
 
         var target = document.getElementById("board"+boardId);
         var newDiv = document.createElement("div");
+        newDiv.setAttribute("class", "board_table");
 
         cardList = dataHandler.getCardsByBoardId();
 
         newDiv.innerHTML = 
-        `<div name="field_new" id="field_new" class="field"> 
+
+        `
+        <div class="row_board"><div name="field_new" id="field_new" class="field"> 
                 <div name="status_new" id="status_new" class="status"> New </div>
                 <div name="area_new" id="area_new" class="area"> 
                     <div name="task_new" id="task_new" class="task"> Task1 </div>
@@ -96,8 +99,9 @@ dom = {
             <div name="field_done" id="field_done" class="field">
                 <div name="status_done" id="status_done" class="status"> Done </div>
                 <div name="area_done" id="area_done" class="area"> 
-                    <div name="task_done" id= "task_done" class="task_done"> Task1 </div>
+                    <div name="task_done" id= "task_done" class="task"> Task1 </div>
                 </div>
+            </div>
             </div>
             `;
          target.appendChild(newDiv);
@@ -109,17 +113,10 @@ dom = {
         // it adds necessary event listeners also
     },
     addBoard: function() {
-<<<<<<< HEAD
-        var target = document.getElementById("wrapper");
-        var newdiv = document.createElement("div");
-        newdiv.innerHTML = `<div class="board"><div class="board_title">Board title</div><div onclick="dom.showCards()" class="dropdown_button">Dropdown button</div></div>`;
-        target.appendChild(newdiv);
-=======
         document.getElementById('myModal').style.display = "none";
         dataHandler.createNewBoard(document.getElementById('input_title').value);
 
-        this.showBoards()
->>>>>>> develop
+        this.showBoards();
     }
 
     // here comes more features
