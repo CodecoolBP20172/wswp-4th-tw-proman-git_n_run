@@ -67,8 +67,18 @@ dom = {
 
 
         var target = document.getElementById("board"+boardId);
+        
+        var isBoardOpened = false;
+        for (var i = 0; i < target.children.length; i++) { //checking children of target
+            if (target.children[i].dataset.table=="true"){ 
+                isBoardOpened = true; //if board_table is found the dropdown is opened
+            }
+        }
+        
+        if (isBoardOpened == false) {
         var tableDiv = document.createElement("div");
         tableDiv.setAttribute("class", "row");
+        tableDiv.setAttribute("data-table", "true");
 
         //cardList = dataHandler.getCardsByBoardId();
 
@@ -80,9 +90,9 @@ dom = {
         target.appendChild(tableDiv);
 
 
-//-----------------------------------------------------------------------------------------------------------
         var areaDiv = document.createElement("div");
         areaDiv.setAttribute("class","row");
+        areaDiv.setAttribute("data-area", "true");
         areaDiv.innerHTML = `
                 <div name="area_new" id="${boardId}status_id1" class="col" area_new></div>
                 <div name="area_progress" id="${boardId}status_id2" class="col" area_progress></div>               
@@ -105,6 +115,33 @@ dom = {
                 }
             }
         }
+
+        //This should be looked, placed, etc... 
+    target = document.getElementById("board"+boardId);
+    var divForCreateButton = document.createElement("div"); //create a button to make a new task
+    divForCreateButton.setAttribute("data-create_button", "true");
+    divForCreateButton.innerHTML = `<button onclick="dom.addNewCard()">Create new task</button>`;
+    target.appendChild(divForCreateButton);
+        }
+    else {
+       var target = document.getElementById("board"+boardId);
+        for (var i = 0; i < target.children.length; i++) {   //if dropdown clicked and opned, it removes the board and the create button
+            if (target.children[i].dataset.table=="true"){
+                target.removeChild(target.children[i]);
+            }
+        }
+        for (var i = 0; i < target.children.length; i++) {
+             if (target.children[i].dataset.area=="true"){
+                target.removeChild(target.children[i]);
+            }
+        }
+        for (var i = 0; i < target.children.length; i++) {
+            if (target.children[i].dataset.create_button=="true"){
+                target.removeChild(target.children[i]);      
+            }
+        }
+        
+    }
         
            
     
@@ -116,10 +153,10 @@ dom = {
         dataHandler.createNewBoard(document.getElementById('input_title').value);
 
         this.showBoards();
+    },
+       addNewCard: function() {
+        //here comes the function
     }
 
     // here comes more features
-}   
-
-
-
+}  
