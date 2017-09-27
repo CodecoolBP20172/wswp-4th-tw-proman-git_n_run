@@ -103,8 +103,20 @@ dataHandler = {
             'title':cardTitle
         });
         this.saveData();
-        // creates new board, saves it and returns its id
-    },
         // creates new card for the given board, saves it and returns its id
+    },
+    editCardTitle: function(cardID, newCardTitle) {
+        this.loadData();
+        for (var i = 0; i <this.data.cards.length; i++){
+            if (this.data.cards[i].id === cardID) {
+                this.data.cards[i].title = newCardTitle;
+            }
+        }
+        this.saveData();
+        // edits the title of the card
     }
+}
     // here comes more features
+
+
+    

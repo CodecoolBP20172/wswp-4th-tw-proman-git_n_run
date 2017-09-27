@@ -11,12 +11,13 @@ dom = {
             <div class="new_board_button">
                 <button id="board_creator">Create board</button>
             </div>
+
         <div id="myModal" class="modal">
           <div class="modal-content">
             <span class="close">&times;</span>
             Please, provide a name if the new board!
             <form onSubmit='dom.addBoard(this); return false' action="/#">        
-                <input type="text" id="input_title" name="firstname"></input>        
+                <input type="text" id="input_title" name="newBoardName"></input>        
             </form>
           </div>
       
@@ -70,7 +71,7 @@ dom = {
 
 
         var target = document.getElementById("board"+boardId);
-        var newDiv = document.createElement("div");
+        var newDiv = document.createElement("div"); //<div></div>
         newDiv.setAttribute("class", "board_table");
 
         cardList = dataHandler.getCardsByBoardId();
@@ -106,16 +107,15 @@ dom = {
             `;
         target.appendChild(newDiv);
 
-        cardList= dataHandler.getCardsByBoardId(boardId);
-        console.log(cardList);
-        newcard = document.createElement("div");
+        var cardList= dataHandler.getCardsByBoardId(boardId);
+        var newcard = document.createElement("div");
         for(let statusid = 1; statusid < 5; statusid ++ ){
             target = document.getElementById(boardId+"status_id" + statusid)
             for (let card_id = 0; card_id < cardList.length; card_id ++){
                 newcard.innerHTML = cardList[card_id].title//<div>title</div>
-                console.log(newcard.innerHTML)
                 if(cardList[card_id].status_id == target.id.slice(-1)){
-                target.innerHTML += ` <div>${cardList[card_id].title}</div>`
+                target.innerHTML += ` <div ondblclick="dom.editField(${cardList[card_id].titles}, ${cardList[card_id].id}, ${cardList[card_id].board_id})"
+                                        id=${cardList[card_id].id}>${cardList[card_id].title}</div>`
                 }
             }
         }
@@ -130,10 +130,19 @@ dom = {
         dataHandler.createNewBoard(document.getElementById('input_title').value);
 
         this.showBoards();
+    },
+    editField: function(cardTitle, cardID, cardBoardID) {
+        var newCardTitle = prompt("Editing Title", "cardTitle");
+        if (newCardTitle == null || newCardTitle == "") {
+            this.editField(cardTitle, cardID);
+        } else {
+            dataHandler.editCardTitle(cardID, newCardTitle);
+            this.showBoards();
+            this.showCards(cardBoardID);
+        }
     }
 
     // here comes more features
 }   
-
 
 
