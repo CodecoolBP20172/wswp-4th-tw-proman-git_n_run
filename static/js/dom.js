@@ -4,22 +4,21 @@ dom = {
         var target = document.getElementById("body_id");
         target.innerHTML = ""
         var newdiv = document.createElement("div");
+        newdiv.setAttribute("class", "container")
+        newdiv.setAttribute("id", "wrapper")
         newdiv.innerHTML = `
-        <div class="container" id="wrapper">
         <div class="row" id="header">
             <div class="col" id="title">Proman</div>
-            <div class="col">
-                <button class="btn btn-dark" id="board_creator">Create board</button>
-            </div>
-        <div id="myModal" class="modal">
+            <div class="col"><button class="btn btn-dark" id="board_creator">Create board</button></div>
+        </div>
+            <div id="myModal" class="modal">
           <div class="modal-content">
             <span class="close">&times;</span>
             Please, provide a name if the new board!
             <form onSubmit='dom.addBoard(this); return false' action="/#">        
                 <input type="text" id="input_title" name="firstname"></input>        
             </form>
-          </div>
-      
+        </div>
         </div>
         `
         target.appendChild(newdiv);
@@ -50,11 +49,11 @@ dom = {
         newdiv = document.createElement("div");
         tablelist = dataHandler.getBoards();
         for (let i= 0; i < tablelist.length; i++){
-            newdiv.innerHTML += `<div class="row board_row" id="board${tablelist[i].id}">
-                                <div class="col">${tablelist[i].title}</div>
-                                <div onclick="dom.showCards()" class="col">Dropdown button
-                                </div>
-                                </div>`
+            newdiv.innerHTML += `<div class="container" id="board${tablelist[i].id}" board>
+                                <div class="row">
+                                <div class="col" id="board_title">${tablelist[i].title}</div>
+                                <div onclick="dom.showCards(${tablelist[i].id})" class="col" id="drop_down_button"><img src="static/images/drop_down_icon.png" width="6%"></div>
+                                </div></div>`
         target.appendChild(newdiv)
         // loads and shows boards appending them to #boards div
         // it adds necessary event listeners also
@@ -63,42 +62,51 @@ dom = {
 
 
     showCards: function(boardId) {
-        alert("ShowTime!!!");
-        var dropdown_button = document.getElementsByClassName("dropdown_button");
-        dropdown_button.addEventListener("click", showCards);
+        //var dropdownButton = document.getElementsByClassName("dropdown_button");
+        //dropdownButton.addEventListener("click", showCards);
 
-        var parent = document.getElementById("body_id");
-        var child = document.getElementsByClassName("container");
-        parent.removeChild(child);
 
-        var target = document.getElementById("body_id");
-        var newDiv = document.createElement("div");
-        newDiv.innerHTML = 
-        `<div name="field_new" id="field_new" class="field"> 
-                <div name="status_new" id="status_new" class="status"> New </div>
-                <div name="area_new" id="area_new" class="area"> 
-                    <div name="task_new" id="task_new" class="task"> Task1 </div>
+        var target = document.getElementById("board"+boardId);
+        var tableDiv = document.createElement("div");
+        tableDiv.setAttribute("class", "row");
+
+        //cardList = dataHandler.getCardsByBoardId();
+
+        tableDiv.innerHTML =`
+                <div name="status_new" id="status_new" class="col"> New </div>
+                <div name="status_progress" id="status_progress" class="col"> In Progress</div>
+                <div name="status_testing" id="status_testing" class="col"> Testing </div>
+                <div name="status_done" id="status_done" class="col"> Done </div>`
+        target.appendChild(tableDiv);
+
+
+//-----------------------------------------------------------------------------------------------------------
+        var areaDiv = document.createElement("div");
+        areaDiv.setAttribute("class","row");
+        areaDiv.innerHTML = `
+                <div name="area_new" id="${boardId}status_id1" class="col" area_new></div>
+                <div name="area_progress" id="${boardId}status_id2" class="col" area_progress></div>               
+                <div name="area_testing" id="${boardId}status_id3" class="col" area_testing></div>
+                <div name="area_done" id="${boardId}status_id4" class="col" area_done></div>
                 </div>
-            </div>
-            <div name="field_progress" id="field_progress" class="field">
-                <div name="status_progress" id="status_progress" class="status"> In Progress </div>
-                <div name="area_progress" id="area_progress" class="area"> 
-                    <div name="task_progress" id="task_progress" class="task"> Task1 </div>
-                </div>
-            </div>
-            <div name="field_testing" id="field_testing" class="field">
-                <div name="status_testing" id="status_testing" class="status"> Testing </div>
-                <div name="area_testing" id="area_testing" class="area"> 
-                    <div name="task_testing" id="task_testing" class="task"> Task1 </div>
-                </div>
-            </div>
-            <div name="field_done" id="field_done" class="field">
-                <div name="status_done" id="status_done" class="status"> Done </div>
-                <div name="area_done" id="area_done" class="area"> 
-                    <div name="task_done" id= "task_done" class="task_done"> Task1 </div>
-                </div>
-            </div>
-            `;
+        `
+        target.appendChild(areaDiv);
+
+        cardList= dataHandler.getCardsByBoardId(boardId);
+        console.log(cardList);
+        newcard = document.createElement("div");
+        for(let statusid = 1; statusid < 5; statusid ++ ){
+            target = document.getElementById(boardId+"status_id" + statusid)
+            for (let card_id = 0; card_id < cardList.length; card_id ++){
+                newcard.innerHTML = cardList[card_id].title//<div>title</div>
+                console.log(newcard.innerHTML)
+                if(cardList[card_id].status_id == target.id.slice(-1)){
+                target.innerHTML += ` <div class="col" id="card">${cardList[card_id].title}</div>`
+                }
+            }
+        }
+        
+           
     
         // loads and shows the cards of a board
         // it adds necessary event listeners also
@@ -107,7 +115,7 @@ dom = {
         document.getElementById('myModal').style.display = "none";
         dataHandler.createNewBoard(document.getElementById('input_title').value);
 
-        this.showBoards()
+        this.showBoards();
     }
 
     // here comes more features

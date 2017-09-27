@@ -1,5 +1,5 @@
 body {
-    background: #FFF9EB;
+    background: #222222;
     font-family: Tahoma;
 }
 
@@ -7,84 +7,86 @@ body {
     margin-top: 3%;
 }
 
-.board_row {
-    background: #979797;
-    margin: 2% 0% 2% 0%;
-    padding: 1.5% 0% 1.5% 0%;
-    border-style: solid;
-    border-radius: 15px 15px 0px 0px;
+#header {
+    align-items: center;
 }
-
 #title {
+    text-shadow: 1px 0px 40px #FF9718;
+	color: #FF9718;
     font-family: "Bookman Old Style";
-    font-size: 1.5em;
+    font-size: 2.5em;
     font-weight: bold;
     text-transform: uppercase;
-    text-shadow: 2px 2px 3px grey;
+}
+
+div[board] {
+    background: #FF9718;
+    margin: 2% 0% 2% 0%;
+    border-radius: 15px 15px 15px 15px;
 }
 
 #board_creator {
+    color: #FF9718;
+    background: #222;
+    border-width: 2px;
+    border-color: #FF9718;
     float: right;
 }
 
-#boards {
-    background-color: #FFFBEB;
+#board_title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    vertical-align: center;
 }
 
-.field {
-    background-color: red;
-    height: 540px;
+#drop_down_button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: right;
 }
 
-.status {
-    background-color: blue;
-    height: 100px;
-    margin: 10px 10px 10px 10px;
+#status_new {
+    border-style: dotted;
+    margin: 1% 1% 1% 2%;
+    text-align: center;
+    font-weight: bold;
 }
 
-.task_area {
-    background-color: orange;
-    height: 300px;
-    padding: 50px;
-    margin: 10px 10px 10px 10px;
-    
+#status_progress, #status_testing {
+    border-style: dotted;
+    margin: 1% 1% 1% 1%;
+    text-align: center;
+    font-weight: bold;
 }
 
-
-.task {
-    background-color: green;
+#status_done {
+    border-style: dotted;
+    margin: 1% 2% 1% 1%;
+    text-align: center;
+    font-weight: bold;
 }
 
-.title {
-    background: yellow;
-    display: inline;
-    width: 45%;
-    float: left;
+div[area_new] {
+    border-style: dashed;
+    margin: 1% 1% 1% 2%;
 }
-.new_board_button {
-    background: brown;
-    display: inline;
-    float: right;
-    width: 45%;
+
+div[area_progress], div[area_testing] {
+    border-style: dashed;
+    margin: 1% 1% 1% 1%;
 }
-.board {
-    margin-top: 20px;
-    marker-end: 20px;
-    background: #3E3EA7;
-    height: 30px;
+
+div[area_done] {
+    border-style: dashed;
+    margin: 1% 2% 1% 1%;
 }
-.board_title {
-    background: fuchsia;
-    display: inline;
-    float: left;
-    width: 45%;
-}
-.dropdown_button {
-    background: #19D898;
-    display: inline;
-    float: right;
-    width: 45%;
-}
-.proba {
-    color: red;
+
+#card {
+    background: #5E5E5E;
+    margin: 6% 0% 6% 0%;
+    border-radius: 4px 10px 4px 10px;
+    color: rgb(255, 214, 168);
 }
