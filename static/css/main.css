@@ -115,3 +115,16 @@ div[area_done] {
     margin-bottom: 3%;
     margin-top: 2%;
 }
+
+#edit_card_button {
+    background: #222;
+    border-color: #222;
+    margin-top: 25px;
+    margin-right: 2%;
+    margin-left: 80%;
+}
+
+#edit_card_pencil {
+    font-size: 1.2em;
+    color: #FF9718;
+}
