@@ -79,9 +79,10 @@ dom = {
                 newcard.innerHTML = cardList[card_id].title//<div>title</div>
                 if(cardList[card_id].status_id == target.id.slice(-1)){
                 target.innerHTML += `<div class="card" id=${cardList[card_id].id}>${cardList[card_id].title}
-                                    class="btn btn-xs btn-primary" ondclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})"
+                                    class="btn btn-xs btn-primary" onclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})"
                                     <span class="glyphicon glyphicon-pencil" >
-                                    </span></div>`
+                                    </span></div>
+                                    <a href="#" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-pencil"></span> edit</a>`
                 }
             }
         }
