@@ -88,20 +88,18 @@ dataHandler = {
         this.saveData();
         // creates new board, saves it and returns its id
     },
-    createNewCard: function(cardTitle, boardId, statusId) {
+    createNewCard: function(cardTitle, boardId) {
         this.loadData();
-        var maximumId
-        for (var i = 0; i < this.data.cards.length; i++){
-            if(this.data.cards[i].id > maximumId){
-                maximumId = this.data.boards[i].id
-            }
+        this.data.cards.push(
+                    {
+            "id": this.data.cards.length + 1,
+            "title": cardTitle,
+            "board_id": boardId,
+            "status_id": 1,
+            "order": 3
         }
-        this.data.cards.push({
-            'board_id': boardId,
-            'id': maximumId,
-            'status_id':statusId,
-            'title':cardTitle
-        });
+        )
+        
         this.saveData();
         // creates new board, saves it and returns its id
     },

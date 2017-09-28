@@ -154,8 +154,9 @@ dom = {
 
         this.showBoards();
     },
-       addNewCard: function() {
+    addNewCard: function() {
         //here comes the function
+        
     }
 
     // here comes more features
