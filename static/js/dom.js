@@ -9,42 +9,11 @@ dom = {
         newdiv.innerHTML = `
         <div class="row" id="header">
             <div class="col" id="title">Proman</div>
-            <div class="col"><button class="btn btn-dark" id="board_creator">Create board</button></div>
-        </div>
-            <div id="myModal" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            Please, provide a name if the new board!
-            <form onSubmit='dom.addBoard(this); return false' action="/#">        
-                <input type="text" id="input_title" name="firstname"></input>        
-            </form>
+            <div class="col"><button class="btn btn-dark" id="board_creator" onclick="dom.addBoard()">Create board</button></div>
         </div>
         </div>
         `
         target.appendChild(newdiv);
-                // Get the modal
-        var modal = document.getElementById('myModal');
-
-        // Get the button that opens the modal
-        var button = document.getElementById("board_creator");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        button.onclick = function() {
-        modal.style.display = "block";
-        }
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
         target = document.getElementById("wrapper")
         newdiv = document.createElement("div");
         tablelist = dataHandler.getBoards();
@@ -111,7 +80,8 @@ dom = {
                 newcard.innerHTML = cardList[card_id].title//<div>title</div>
                 console.log(newcard.innerHTML)
                 if(cardList[card_id].status_id == target.id.slice(-1)){
-                target.innerHTML += ` <div class="col" id="card">${cardList[card_id].title}</div>`
+                target.innerHTML += ` <div ondblclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})"
+                                        id=${cardList[card_id].id}>${cardList[card_id].title}</div>`
                 }
             }
         }
@@ -120,7 +90,7 @@ dom = {
     target = document.getElementById("board"+boardId);
     var divForCreateButton = document.createElement("div"); //create a button to make a new task
     divForCreateButton.setAttribute("data-create_button", "true");
-    divForCreateButton.innerHTML = `<button onclick="dom.addNewCard()">Create new task</button>`;
+    divForCreateButton.innerHTML = `<button onclick="dom.addNewCard(${boardId})">Create new task</button>`;
     target.appendChild(divForCreateButton);
         }
     else {
@@ -149,14 +119,34 @@ dom = {
         // it adds necessary event listeners also
     },
     addBoard: function() {
-        document.getElementById('myModal').style.display = "none";
-        dataHandler.createNewBoard(document.getElementById('input_title').value);
-
-        this.showBoards();
+        var newBoardTitle = prompt("Please write your new board's name", "New board name");
+        if (newBoardTitle == null || newBoardTitle == "") {
+            this.addBoard();
+        } else {
+            dataHandler.createNewBoard(newBoardTitle);
+            this.showBoards();
+        }
     },
-    addNewCard: function() {
-        //here comes the function
-        
+    addNewCard: function(boardId){
+        var createdCardTitle = prompt("Please write your new card's name", "new card name");
+        if (createdCardTitle== null || createdCardTitle == "") {
+            this.editField(cardTitle, cardID);
+        } else {
+            dataHandler.editCardTitle(cardID, createdCardTitle);
+            this.showBoards();
+            this.showCards(boardID);
+        }
+
+    },
+    editField: function(cardID, cardBoardID) {
+        var newCardTitle = prompt("Editing Title", "cardTitle");
+        if (newCardTitle == null || newCardTitle == "") {
+            this.editField(cardTitle, cardID);
+        } else {
+            dataHandler.editCardTitle(newCardTitle,cardID);
+            this.showBoards();
+            this.showCards(cardBoardID);
+        }
     }
 
     // here comes more features
