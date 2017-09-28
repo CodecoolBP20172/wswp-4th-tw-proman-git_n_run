@@ -134,7 +134,7 @@ dom = {
         } else {
             dataHandler.editCardTitle(cardID, createdCardTitle);
             this.showBoards();
-            this.showCards(BoardID);
+            this.showCards(boardID);
         }
 
     },
