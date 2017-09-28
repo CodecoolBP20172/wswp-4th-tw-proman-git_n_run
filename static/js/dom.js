@@ -72,13 +72,11 @@ dom = {
         target.appendChild(areaDiv);
 
         cardList= dataHandler.getCardsByBoardId(boardId);
-        console.log(cardList);
         newcard = document.createElement("div");
         for(let statusid = 1; statusid < 5; statusid ++ ){
             target = document.getElementById(boardId+"status_id" + statusid)
             for (let card_id = 0; card_id < cardList.length; card_id ++){
                 newcard.innerHTML = cardList[card_id].title//<div>title</div>
-                console.log(newcard.innerHTML)
                 if(cardList[card_id].status_id == target.id.slice(-1)){
                 target.innerHTML += ` <div ondblclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})"
                                         id=${cardList[card_id].id}>${cardList[card_id].title}</div>`
@@ -132,20 +130,20 @@ dom = {
         if (createdCardTitle== null || createdCardTitle == "") {
             this.editField(cardTitle, cardID);
         } else {
-            dataHandler.editCardTitle(cardID, createdCardTitle);
+            dataHandler.createNewCard(createdCardTitle, boardId);
             this.showBoards();
-            this.showCards(boardID);
+            this.showCards(boardId);
         }
 
     },
-    editField: function(cardID, cardBoardID) {
+    editField: function(cardId, cardBoardId) {
         var newCardTitle = prompt("Editing Title", "cardTitle");
         if (newCardTitle == null || newCardTitle == "") {
             this.editField(cardTitle, cardID);
         } else {
-            dataHandler.editCardTitle(newCardTitle,cardID);
+            dataHandler.editCardTitle(cardId, newCardTitle);
             this.showBoards();
-            this.showCards(cardBoardID);
+            this.showCards(cardBoardId);
         }
     }
 
