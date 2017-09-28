@@ -115,6 +115,13 @@ dataHandler = {
             }
             this.saveData();
             // edits the title of the card
-            }
+        },
+        changeCardStatus: function(boardId, cardId){
+            this.loadData();
+            var cardToChange = this.getCard(parseInt(cardId));
+            cardToChange.status_id = parseInt(boardId.slice(-1));
+            this.saveData();
+            return cardToChange.board_id
+        }
     }
     // here comes more features

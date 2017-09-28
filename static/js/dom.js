@@ -63,10 +63,10 @@ dom = {
         areaDiv.setAttribute("class","row");
         areaDiv.setAttribute("data-area", "true");
         areaDiv.innerHTML = `
-                <div name="area_new" id="${boardId}status_id1" class="col" area_new></div>
-                <div name="area_progress" id="${boardId}status_id2" class="col" area_progress></div>               
-                <div name="area_testing" id="${boardId}status_id3" class="col" area_testing></div>
-                <div name="area_done" id="${boardId}status_id4" class="col" area_done></div>
+                <div ondrop="dom.drop(event)" ondragover="dom.allowDrop(event)" name="area_new" id="${boardId}status_id1" class="col" area_new></div>
+                <div ondrop="dom.drop(event)" ondragover="dom.allowDrop(event)" name="area_progress" id="${boardId}status_id2" class="col" area_progress></div>               
+                <div ondrop="dom.drop(event)" ondragover="dom.allowDrop(event)" name="area_testing" id="${boardId}status_id3" class="col" area_testing></div>
+                <div ondrop="dom.drop(event)" ondragover="dom.allowDrop(event)" name="area_done" id="${boardId}status_id4" class="col" area_done></div>
                 </div>
         `
         target.appendChild(areaDiv);
@@ -78,7 +78,7 @@ dom = {
             for (let card_id = 0; card_id < cardList.length; card_id ++){
                 newcard.innerHTML = cardList[card_id].title//<div>title</div>
                 if(cardList[card_id].status_id == target.id.slice(-1)){
-                target.innerHTML += ` <div class="card" ondblclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})"
+                target.innerHTML += ` <div ondrop="dom.doNothing(event)" draggable="true" ondragstart="dom.drag(event)" class="card" ondblclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})"
                                         id=${cardList[card_id].id}>${cardList[card_id].title}</div>`
                 }
             }
@@ -145,7 +145,33 @@ dom = {
             this.showBoards();
             this.showCards(cardBoardId);
         }
+    },
+    allowDrop: function(ev) {
+        ev.preventDefault();
+    },
+
+    drag: function(ev) {
+        ev.dataTransfer.setData("cardId", ev.target.id);
+    },
+
+    drop: function(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("cardId");
+        this.showBoards();
+        if(dom.droppedOnCard === false){
+        this.showCards(dataHandler.changeCardStatus(ev.target.id, data));
     }
+    else{
+        dom.droppedOnCard = false
+        this.showCards(dataHandler.getCard(parseInt(data)).board_id)
+    }
+    },    
+    doNothing : function(ev){
+        dom.droppedOnCard = true;
+    },
+    droppedOnCard :false
+
+
 
     // here comes more features
 }  
