@@ -90,7 +90,7 @@ dom = {
     target = document.getElementById("board"+boardId);
     var divForCreateButton = document.createElement("div"); //create a button to make a new task
     divForCreateButton.setAttribute("data-create_button", "true");
-    divForCreateButton.innerHTML = `<button onclick="dom.addNewCard()">Create new task</button>`;
+    divForCreateButton.innerHTML = `<button onclick="dom.addNewCard(${boardId})">Create new task</button>`;
     target.appendChild(divForCreateButton);
         }
     else {
@@ -119,7 +119,7 @@ dom = {
         // it adds necessary event listeners also
     },
     addBoard: function() {
-        var newBoardTitle = prompt("New board", "New board name");
+        var newBoardTitle = prompt("Please write your new board's name", "New board name");
         if (newBoardTitle == null || newBoardTitle == "") {
             this.addBoard();
         } else {
@@ -127,12 +127,23 @@ dom = {
             this.showBoards();
         }
     },
+    addNewCard: function(boardId){
+        var createdCardTitle = prompt("Please write your new card's name", "new card name");
+        if (createdCardTitle== null || createdCardTitle == "") {
+            this.editField(cardTitle, cardID);
+        } else {
+            dataHandler.editCardTitle(cardID, createdCardTitle);
+            this.showBoards();
+            this.showCards(BoardID);
+        }
+
+    },
     editField: function(cardID, cardBoardID) {
         var newCardTitle = prompt("Editing Title", "cardTitle");
         if (newCardTitle == null || newCardTitle == "") {
             this.editField(cardTitle, cardID);
         } else {
-            dataHandler.editCardTitle(cardID, newCardTitle);
+            dataHandler.editCardTitle(newCardTitle,cardID);
             this.showBoards();
             this.showCards(cardBoardID);
         }
