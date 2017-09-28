@@ -78,7 +78,7 @@ dom = {
             for (let card_id = 0; card_id < cardList.length; card_id ++){
                 newcard.innerHTML = cardList[card_id].title//<div>title</div>
                 if(cardList[card_id].status_id == target.id.slice(-1)){
-                target.innerHTML += ` <div ondblclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})"
+                target.innerHTML += ` <div class="card" ondblclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})"
                                         id=${cardList[card_id].id}>${cardList[card_id].title}</div>`
                 }
             }
@@ -88,7 +88,7 @@ dom = {
     target = document.getElementById("board"+boardId);
     var divForCreateButton = document.createElement("div"); //create a button to make a new task
     divForCreateButton.setAttribute("data-create_button", "true");
-    divForCreateButton.innerHTML = `<button onclick="dom.addNewCard(${boardId})">Create new task</button>`;
+    divForCreateButton.innerHTML = `<button button class="btn btn-dark" id="create_new_task" onclick="dom.addNewCard(${boardId})">Create new task</button>`;
     target.appendChild(divForCreateButton);
         }
     else {
