@@ -43,50 +43,75 @@ div[board] {
 }
 
 #drop_down_button {
+    font-size: 1.3em;
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: right;
 }
 
 #status_new {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     border-style: dotted;
     margin: 1% 1% 1% 2%;
     text-align: center;
     font-weight: bold;
+    font-size: 1.2em;
+    text-transform: uppercase;
 }
 
 #status_progress, #status_testing {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     border-style: dotted;
     margin: 1% 1% 1% 1%;
     text-align: center;
     font-weight: bold;
+    font-size: 1.2em;
+    text-transform: uppercase;
 }
 
 #status_done {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     border-style: dotted;
     margin: 1% 2% 1% 1%;
     text-align: center;
     font-weight: bold;
+    font-size: 1.2em;
+    text-transform: uppercase;
 }
 
 div[area_new] {
     border-style: dashed;
     margin: 1% 1% 1% 2%;
+    min-height: 300px;
+    text-align: center
 }
-
 div[area_progress], div[area_testing] {
     border-style: dashed;
     margin: 1% 1% 1% 1%;
+    text-align: center;
 }
-
 div[area_done] {
     border-style: dashed;
     margin: 1% 2% 1% 1%;
+    text-align: center;
 }
-
-#card {
-    background: #5E5E5E;
+.card {
+    background: #222;
     margin: 6% 0% 6% 0%;
+    padding: 7% 4% 4% 4%;
     border-radius: 4px 10px 4px 10px;
     color: rgb(255, 214, 168);
+    min-height: 100px;
+    font-size: 1.2em;
+}
+
+#create_new_task {
+    color: #222;
+    background: #FF9718;
+    border-width: 2px;
+    border-color: #222;
+    margin-left: 44%;
+    margin-right: 44%;
+    margin-bottom: 3%;
+    margin-top: 2%;
 }
