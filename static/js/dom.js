@@ -79,9 +79,9 @@ dom = {
                 newcard.innerHTML = cardList[card_id].title//<div>title</div>
                 if(cardList[card_id].status_id == target.id.slice(-1)){
                 target.innerHTML += `<div class="card">
-                                        <div id=${cardList[card_id].id}>${cardList[card_id].title}</div>
-                                        <a href="#" class="btn btn-xs btn-primary" id="edit_card_button" onclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})"><i class="fa fa-pencil" id="edit_card_pencil" aria-hidden="true"></i>
-                                        </a>
+                                        <div id=${cardList[card_id].id}>${cardList[card_id].title}<div id="edit_div">
+                                        <a href="#" id="edit_card_button" onclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})"><i class="fa fa-pencil" id="edit_card_pencil" aria-hidden="true"></i>
+                                        </a></div>
                                     </div>`
                 }
             }
