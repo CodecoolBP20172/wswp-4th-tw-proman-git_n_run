@@ -107,6 +107,8 @@ dataHandler = {
         editCardTitle: function(cardID, newCardTitle) {
             this.loadData();
             for (var i = 0; i <this.data.cards.length; i++){
+                console.log(this.data.cards[i])
+                console.log(cardID)
                 if (this.data.cards[i].id === cardID) {
                     this.data.cards[i].title = newCardTitle;
                 }
