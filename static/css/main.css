@@ -43,6 +43,7 @@ div[board] {
 }
 
 #drop_down_button {
+    font-size: 1.3em;
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: right;

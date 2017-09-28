@@ -21,7 +21,7 @@ dom = {
             newdiv.innerHTML += `<div class="container" id="board${tablelist[i].id}" board>
                                 <div class="row">
                                 <div class="col" id="board_title">${tablelist[i].title}</div>
-                                <div onclick="dom.showCards(${tablelist[i].id})" class="col" id="drop_down_button"><img src="static/images/drop_down_icon.png" width="6%"></div>
+                                <div onclick="dom.showCards(${tablelist[i].id})" class="col" id="drop_down_button">▼</div>
                                 </div></div>`
         target.appendChild(newdiv)
         // loads and shows boards appending them to #boards div
