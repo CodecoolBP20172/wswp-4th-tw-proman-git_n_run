@@ -78,8 +78,10 @@ dom = {
             for (let card_id = 0; card_id < cardList.length; card_id ++){
                 newcard.innerHTML = cardList[card_id].title//<div>title</div>
                 if(cardList[card_id].status_id == target.id.slice(-1)){
-                target.innerHTML += ` <div class="card" ondblclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})"
-                                        id=${cardList[card_id].id}>${cardList[card_id].title}</div>`
+                target.innerHTML += `<div class="card" id=${cardList[card_id].id}>${cardList[card_id].title}
+                                    class="btn btn-xs btn-primary" ondclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})"
+                                    <span class="glyphicon glyphicon-pencil" >
+                                    </span></div>`
                 }
             }
         }
