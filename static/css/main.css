@@ -52,7 +52,7 @@ div[board] {
 #status_new {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     border-style: dotted;
-    margin: 1% 1% 1% 2%;
+    margin: 1% 1% 1% 1%;
     text-align: center;
     font-weight: bold;
     font-size: 1.2em;
@@ -72,7 +72,7 @@ div[board] {
 #status_done {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     border-style: dotted;
-    margin: 1% 2% 1% 1%;
+    margin: 1% 1% 1% 1%;
     text-align: center;
     font-weight: bold;
     font-size: 1.2em;
@@ -81,9 +81,9 @@ div[board] {
 
 div[area_new] {
     border-style: dashed;
-    margin: 1% 1% 1% 2%;
+    margin: 1% 1% 1% 1%;
     min-height: 300px;
-    text-align: center
+    text-align: center;
 }
 div[area_progress], div[area_testing] {
     border-style: dashed;
@@ -92,7 +92,7 @@ div[area_progress], div[area_testing] {
 }
 div[area_done] {
     border-style: dashed;
-    margin: 1% 2% 1% 1%;
+    margin: 1% 1% 1% 1%;
     text-align: center;
 }
 .card {
@@ -110,8 +110,14 @@ div[area_done] {
     background: #FF9718;
     border-width: 2px;
     border-color: #222;
-    margin-left: 44%;
-    margin-right: 44%;
-    margin-bottom: 3%;
-    margin-top: 2%;
+    margin: 2% 44% 3% 44%;
+}
+#edit_div {
+    float: right;
+    margin-top: 80px;
+}
+
+#edit_card_pencil {
+    font-size: 1.2em;
+    color: #FF9718;
 }
