@@ -32,7 +32,7 @@ def getajaxobject():                    //getting the data that was sent from th
 
 function getajax(){                     //getting data from the server.py
     $.ajax({                            
-    url: '/getcards',                   //function url that is sending the data
+    url: '/get-boards',                   //function url that is sending the data
     type: 'GET', 
     success : function(data){           //whatever you want to do with the data, it must be placed inside this function(asyncron problem)
         console.log(data)               //data is stored in a list of objects(in theory..xd)

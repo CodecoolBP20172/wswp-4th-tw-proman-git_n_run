@@ -22,11 +22,19 @@ dataHandler = {
         localStorage.setItem('data', JSON.stringify(this.data))
     },
 
-    getBoards: function() {
-        this.loadData()
-        return this.data.boards;
-        // returns the boards from this.data
+    getBoards: function(callback) {
+        $.ajax({                            
+        url: "/get-boards",                  
+        dataType : "json",
+        type: "GET",
+        //async:false,
+        success : function(boards){
+            callback(boards)
+        }
+    })
     },
+    
+
     getBoard: function(boardId) {
         this.loadData()
         for (var i = 0;i < this.getBoards().length; i++){
@@ -76,7 +84,6 @@ dataHandler = {
         this.loadData();
         var maximumId = 0
         for (var i = 0; i < this.data.boards.length; i++){
-            console.log(this.data.boards[i])
             if(this.data.boards[i].id > maximumId){
                 maximumId = this.data.boards[i].id
             }
@@ -107,8 +114,6 @@ dataHandler = {
         editCardTitle: function(cardID, newCardTitle) {
             this.loadData();
             for (var i = 0; i <this.data.cards.length; i++){
-                console.log(this.data.cards[i])
-                console.log(cardID)
                 if (this.data.cards[i].id === cardID) {
                     this.data.cards[i].title = newCardTitle;
                 }
