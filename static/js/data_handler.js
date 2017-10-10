@@ -60,17 +60,18 @@ dataHandler = {
         // returns the status with the given id from this.data
     },
 
-    getCardsByBoardId: function(boardId) {
-        this.loadData();
-        var cardList = []
-        for (var i = 0; i < this.data.cards.length; i++){
-            if (this.data.cards[i].board_id === boardId){
-                cardList.push(this.data.cards[i])
-            }
-        }
-        return cardList
+    getCardsByBoardId: function(boardId, callback) {
+            $.ajax({                            
+            url: `/get-cards-by-board-id/${boardId}`,                  
+            dataType : "json",
+            type: "GET",
+            success : function(cardList){
+                callback(cardList)
+                }
+            })
         // returns the cards from this.data which has the given board id
-    },
+        },
+
     getCard: function(cardId) {
         this.loadData();
         for (var i = 0; i < this.data.cards.length; i++){

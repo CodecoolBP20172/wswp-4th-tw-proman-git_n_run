@@ -32,9 +32,8 @@ dom = {
     showCards: function(boardId) {
         //var dropdownButton = document.getElementsByClassName("dropdown_button");
         //dropdownButton.addEventListener("click", showCards);
-
-
-        var target = document.getElementById("board" + boardId);
+            dataHandler.getCardsByBoardId(boardId, function(cardList){
+            var target = document.getElementById("board" + boardId);
 
         var isBoardOpened = false;
         for (var i = 0; i < target.children.length; i++) { //checking children of target
@@ -42,6 +41,7 @@ dom = {
                 isBoardOpened = true; //if board_table is found the dropdown is opened
             }
         }
+        
 
         if (isBoardOpened == false) {
             var tableDiv = document.createElement("div");
@@ -69,8 +69,6 @@ dom = {
                 </div>
         `
             target.appendChild(areaDiv);
-
-            cardList = dataHandler.getCardsByBoardId(boardId);
             newcard = document.createElement("div");
             for (let statusid = 1; statusid < 5; statusid++) {
                 target = document.getElementById(boardId + "status_id" + statusid)
@@ -113,6 +111,9 @@ dom = {
             }
 
         }
+            })
+
+        
 
 
 

@@ -11,9 +11,16 @@ def index():
 
 @app.route("/get-boards")
 def get_boards():
-    print("asdasd")
     boards = queries.get_boards()
     return jsonify(boards)
+
+
+@app.route("/get-cards-by-board-id/<int:boardId>")
+def get_cards_by_board_id(boardId):
+    card_list = queries.get_cards_by_board_id(boardId)
+    return jsonify(card_list)
+
+
 
 
 if __name__ == "__main__":
