@@ -16,6 +16,20 @@ def add_user():
     return('asd')
 
 
+@app.route("/create-new-card", methods=['POST'])
+def create_new_card():
+    card_title_dict = extract_form()
+    queries.create_new_card(card_title_dict['board_id'], card_title_dict['title'])
+    return('apacukas')
+
+
+@app.route("/edit-card-title", methods=['POST'])
+def edit_card_title():
+    edit_card_title_dict = extract_form()
+    queries.edit_card_title(edit_card_title_dict['id'], edit_card_title_dict['title'])
+    return('apacukas')
+
+
 @app.route("/get-boards")
 def get_boards():
     boards = queries.get_boards()

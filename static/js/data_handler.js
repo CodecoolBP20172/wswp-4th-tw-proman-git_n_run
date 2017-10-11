@@ -11,7 +11,6 @@ dataHandler = {
         url: "/get-boards",                  
         dataType : "json",
         type: "GET",
-        //async:false,
         success : function(boards){
             callback(boards)
         }
@@ -50,32 +49,31 @@ dataHandler = {
         // creates new board, saves it and returns its id
     },
     createNewCard: function(cardTitle, boardId) {
-        this.loadData();
-        this.data.cards.push(
-                    {
-            "id": this.data.cards.length + 1,
-            "title": cardTitle,
-            "board_id": boardId,
-            "status_id": 1,
-            "order": 3
-        }
-        )
-        
-        this.saveData();
-        // creates new board, saves it and returns its id
+        $.ajax({
+            url: '/create-new-card',
+            dataType: 'json',
+            type: "POST",
+            data: {
+                'board_id': boardId,
+                'status_id': 1,
+                'title': cardTitle
+            }
+        })
     },
         // creates new card for the given board, saves it and returns its id
         editCardTitle: function(cardID, newCardTitle) {
-            this.loadData();
-            for (var i = 0; i <this.data.cards.length; i++){
-                if (this.data.cards[i].id === cardID) {
-                    this.data.cards[i].title = newCardTitle;
-                }
+            $.ajax({
+            url: '/edit-card-title',
+            dataType: 'json',
+            type: "POST",
+            data: {
+                'id': cardID,
+                'title': newCardTitle
             }
-            this.saveData();
-            // edits the title of the card
-        },
-        changeCardStatus: function(boardId, cardId){
+        })
+    },
+    
+        changeCardStatus: function(boardId, cardId){            
             this.loadData();
             var cardToChange = this.getCard(parseInt(cardId));
             cardToChange.status_id = parseInt(boardId.slice(-1));

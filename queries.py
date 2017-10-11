@@ -16,6 +16,20 @@ def create_new_board(cursor, board_title):
         INSERT INTO boards (title, user_id) VALUES (%s, 0)
     ''', (board_title,))
 
+@database_common.connection_handler
+def create_new_card(cursor, board_id, title):
+    cursor.execute('''
+        INSERT INTO cards (board_id, status_id, title) VALUES (%s, 1, %s)
+    ''', (board_id, title))
+
+@database_common.connection_handler
+def edit_card_title(cursor, id, title):
+    cursor.execute('''
+        UPDATE cards 
+        SET title= %s 
+        WHERE id= %s
+    ''', (title, id))
+
 
 @database_common.connection_handler
 def get_cards_by_board_id(cursor, boardId):
