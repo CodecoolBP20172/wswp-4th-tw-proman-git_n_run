@@ -122,9 +122,8 @@ dataHandler = {
             cardToChange.status_id = parseInt(boardId.slice(-1));
             this.saveData();
             return cardToChange.board_id
-        }
-    }
-        function sendLogin(){                    //sending data to server.py
+        },    
+        sendLogin: function(){                    //sending data to server.py
             $.ajax({ 
                 url: '/login',                //function route to give the data to
                 type: 'POST',                       //methods =['POST'] must be added to the function in the server.py
@@ -132,9 +131,10 @@ dataHandler = {
                     'username': $( '#username_input' ).val(),    //getting input field value
                     'password': $( '#password_input' ).val(),                 //giving static information
                 },
-                success: function(){                //on success function
-                    console.log("dataSend")
+                success: function(returnValue){                //on success function
+                    window.location.href = returnValue;
                 }
             })
     }
+}
     // here comes more features

@@ -7,4 +7,6 @@ def get_user(cursor, username):
     return cursor.fetchone()
 
 
+
+
 # getBoards for actual user

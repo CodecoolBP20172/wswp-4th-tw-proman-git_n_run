@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>Proman Login</title>
+        <title>Proman Register</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -14,16 +14,18 @@
         <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
         <script src="https://code.jquery.com/jquery-3.2.1.js" defer></script>
     </head>
+    
     <body>
 
         <div class="container">
             <div class="row" id="header">
-                <div class="col" id="title">Proman Login</div>
+                <div class="col" id="title">Proman Register</div>
             </div>
         </div>
         
         <div class="container">
-            <p>Username</p>
+
+            <p>Please choose a username!</p>
             <input type="username" id="username_input" name="username" placeholder="Username">
             <p>Password</p>
             <input type="password" id="password_input" name="password" placeholder="Password">
@@ -38,9 +40,8 @@
                     {%endif%}
                 {%endwith%}
             </div>
+
         </div>
         
     </body>
 </html>
-
-   
