@@ -15,7 +15,8 @@ def get_all_username(cursor):
 
 @database_common.connection_handler
 def add_user(cursor, list_to_write):
-    cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (list_to_write['username'], list_to_write['password']))
+    cursor.execute('''INSERT INTO users (username, password)
+        VALUES(%s, %s)''', (list_to_write['username'], list_to_write['password']))
 
 
 

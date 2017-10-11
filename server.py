@@ -53,32 +53,20 @@ def route_register_page():
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     form_value = extract_form()
-    all_username = []
-    get_all_username = queries.get_all_username()
-    form_value['password'] = common.get_hashed_password(form_value['password'])
-    for pack in get_all_username:
-        all_username.append(pack['username'])
-    if form_value['username'] not in all_username:
-        queries.add_user(form_value)
-        return "/login-page"
+    if form_value['username'].strip() != '' and form_value['password'].strip() != '':
+        all_username = []
+        get_all_username = queries.get_all_username()
+        form_value['password'] = common.get_hashed_password(form_value['password'])
+        for pack in get_all_username:
+            all_username.append(pack['username'])
+        if form_value['username'] not in all_username:
+            queries.add_user(form_value)
+            return "/login-page"
+        else:
+            return "/register-page"
     else:
+        flash("Username and password must be filled!")
         return "/register-page"
-
-
-    ''' hashed_password_from_db = user['password'] if user is not None else ''
-
-    valid_password = user is not None and 'password' in form_value \
-        and form_value['username'].strip() != '' and \
-        common.check_password(form_value['password'], hashed_password_from_db)
-
-    if valid_password:
-        session['logged_in'] = True
-        session['username'] = user['username']
-        session['id'] = user['id']
-        return "/boards"
-    else:
-        flash("Wrong username or password")
-        return "/register-page" '''
 
 
 if __name__ == "__main__":
