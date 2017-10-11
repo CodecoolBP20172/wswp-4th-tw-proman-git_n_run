@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Proman Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+
+        <script src="{{ url_for('static', filename='js/sample_data.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+        <script src="https://use.fontawesome.com/e8e5e96a13.js"></script>
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="row" id="header">
+                <div class="col" id="title">Proman Login</div>
+            </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <form action="/login" id="login_form" method="POST">
+                <li>Username</li>
+                <li><input type="username" id="username_input" name="username" placeholder="Username"><br></li>
+                <li>Password</li>
+                <li><input type="password" id="password_input" name="password" placeholder="Password"></li>
+                <li><input id="login_button" type="submit" value="login"></li>
+            </form>            
+        </div>
+        <div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {%for message in messages %}
+                        <p id="error_message">{{message}}</p>
+                    {%endfor%}
+                {%endif%}
+            {%endwith%}
+        </div>
+    </body>
+</html>
+
+   

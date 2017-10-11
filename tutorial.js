@@ -25,6 +25,7 @@ $.ajax({
 }
 
 //IN PYTHON---------------------------------------------------------
+@app.route('/displayajax')
 def getajaxobject():                    //getting the data that was sent from the javascript ajax function
     newdict = extract_form()            // saving it to a variable
     query.editcard(newdict['id'], newdict['title'])         //running an example query function with it's values
