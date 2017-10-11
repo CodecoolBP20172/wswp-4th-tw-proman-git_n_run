@@ -23,11 +23,9 @@
         </div>
         
         <div class="container">
-            <p>Username</p>
-            <input type="username" id="username_input" name="username" placeholder="Username">
-            <p>Password</p>
-            <input type="password" id="password_input" name="password" placeholder="Password">
-            <button id="login_button" type="submit" value="login" onclick="dataHandler.sendLogin()">Send</button>            
+            <br><input type="username" id="username_input" name="username" placeholder="Username"><br><br>
+            <input type="password" id="password_input" name="password" placeholder="Password"><br><br>
+            <button id="login_button" type="submit" value="login" onclick="dataHandler.sendLogin()">Login</button>            
     
             <div>
                 {% with messages = get_flashed_messages() %}

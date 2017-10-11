@@ -135,6 +135,19 @@ dataHandler = {
                     window.location.href = returnValue;
                 }
             })
-    }
+        },
+        sendRegister: function(){                    //sending data to server.py
+            $.ajax({ 
+                url: '/register',                //function route to give the data to
+                type: 'POST',                       //methods =['POST'] must be added to the function in the server.py
+                data: {                             //data must be an object a json format object
+                    'username': $( '#create_username_input' ).val(),    //getting input field value
+                    'password': $( '#create_password_input' ).val(),                 //giving static information
+                },
+                success: function(returnValue){                //on success function
+                    window.location.href = returnValue;
+                }
+            })
+        }
 }
     // here comes more features
