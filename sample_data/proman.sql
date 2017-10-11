@@ -34,7 +34,7 @@ ALTER TABLE ONLY cards
     ADD CONSTRAINT pk_cards_id PRIMARY KEY (id);
 
 
-INSERT INTO users VALUES (0, 'kutya', 'kutya');
+INSERT INTO users VALUES (0, 'kutya', '$2b$12$XVXxvNO9SK4Rbec/xO/Nd.cTvVb62xU/iR3IEm1UxxNy92QYytw1a');
 
 SELECT pg_catalog.setval('users_id_seq', 1, true);
 

@@ -7,6 +7,15 @@ import queries
 app = Flask(__name__)
 
 
+''' def extract_form():
+    form_input = request.form
+    form_dict = {}
+    for item in form_input.items():
+        form_dict[item[0]] = item[1]
+
+    return form_dict '''
+
+
 @app.route("/")
 def index():
     return render_template("boards.html")
