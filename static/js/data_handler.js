@@ -4,7 +4,6 @@
 // (watch out: when you would like to use a property/function of an object from the
 // object itself then you must use the 'this' keyword before. For example: 'this.data' below)
 dataHandler = {
-    data: {}, // it contains the boards and their cards and statuses
 
     getBoards: function(callback) {
         $.ajax({                            
@@ -72,6 +71,9 @@ dataHandler = {
             }
         })
     },
+    sayhello: function(){
+        console.log("hello")
+    },
     
         changeCardStatus: function(statusId, cardId){     
             $.ajax({
@@ -82,7 +84,11 @@ dataHandler = {
                 'id': cardId,
                 'status_id': parseInt(statusId.slice(-1))
             },
-            
+            success: function(){
+                var card = document.getElementById(cardId)
+                var status = document.getElementById(statusId)
+                status.appendChild(card)
+            }
         })        
 }
 }
