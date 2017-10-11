@@ -41,6 +41,11 @@ def get_cards_by_board_id(boardId):
     card_list = queries.get_cards_by_board_id(boardId)
     return jsonify(card_list)
 
+@app.route("/update-card-status", methods=["POST"])
+def update_card_status():
+    update_card_status= extract_form()
+    queries.update_card_status(update_card_status['id'], update_card_status['status_id'])
+    return "1"
 
 def extract_form(): 
     form_input = request.form

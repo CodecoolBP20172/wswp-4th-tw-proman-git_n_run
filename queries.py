@@ -38,3 +38,12 @@ def get_cards_by_board_id(cursor, boardId):
     '''.format(boardId))
     cardlist = cursor.fetchall()
     return cardlist
+
+#-------------------------------------------------------------------------
+@database_common.connection_handler
+def update_card_status(cursor, card_id, status_id):
+    cursor.execute(''' 
+                        UPDATE cards SET status_id = {}
+                        WHERE id = %s;
+    '''.format(status_id), (card_id,))
+  

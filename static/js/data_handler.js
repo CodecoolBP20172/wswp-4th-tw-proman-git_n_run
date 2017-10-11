@@ -57,7 +57,7 @@ dataHandler = {
                 'board_id': boardId,
                 'status_id': 1,
                 'title': cardTitle
-            }
+            },
         })
     },
         // creates new card for the given board, saves it and returns its id
@@ -73,12 +73,16 @@ dataHandler = {
         })
     },
     
-        changeCardStatus: function(boardId, cardId){            
-            this.loadData();
-            var cardToChange = this.getCard(parseInt(cardId));
-            cardToChange.status_id = parseInt(boardId.slice(-1));
-            this.saveData();
-            return cardToChange.board_id
-        }
-    }
-    // here comes more features
+        changeCardStatus: function(statusId, cardId){     
+            $.ajax({
+            url: '/update-card-status',
+            dataType: 'json',
+            type: "POST",
+            data: {
+                'id': cardId,
+                'status_id': parseInt(statusId.slice(-1))
+            },
+            
+        })        
+}
+}
