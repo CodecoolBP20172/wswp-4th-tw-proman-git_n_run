@@ -9,6 +9,13 @@ def index():
     return render_template("boards.html")
 
 
+@app.route("/create-new-board", methods=['POST'])
+def add_user():
+    board_title_dict = extract_form()
+    queries.create_new_board(board_title_dict['title'])
+    return('asd')
+
+
 @app.route("/get-boards")
 def get_boards():
     boards = queries.get_boards()
@@ -21,7 +28,13 @@ def get_cards_by_board_id(boardId):
     return jsonify(card_list)
 
 
+def extract_form(): 
+    form_input = request.form
+    form_dict = {}
+    for item in form_input.items():
+        form_dict[item[0]] = item[1]
 
+    return form_dict
 
 if __name__ == "__main__":
     app.debug = True
