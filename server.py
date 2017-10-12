@@ -28,9 +28,12 @@ def index():
 
 @app.route('/login-page')
 def route_login_page():
-    if session["logged_in"] is True:
-        return redirect("/")
-    else:
+    try:
+        if session["logged_in"] is True:
+            return redirect("/")
+        else:
+            return render_template('login.html')
+    except KeyError:
         return render_template('login.html')
 
 
