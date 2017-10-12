@@ -75,14 +75,15 @@ dataHandler = {
         console.log("hello")
     },
     
-        changeCardStatus: function(statusId, cardId){     
+        changeCardStatus: function(statusId, cardId, board_id){     
             $.ajax({
             url: '/update-card-status',
             dataType: 'json',
             type: "POST",
             data: {
                 'id': cardId,
-                'status_id': parseInt(statusId.slice(-1))
+                'status_id': parseInt(statusId.slice(-1)),
+                'board_id': statusId.charAt(0)
             },
             success: function(){
                 var card = document.getElementById(cardId)

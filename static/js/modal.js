@@ -2,6 +2,7 @@
     	initModal: function() {
     		$("#modal_error_message").html();
     		$('#modal_input_value').val("")
+            $('#modal_input_value').attr("placeholder", "");
     		modalHandler.modal.style.display = "block"
 
     		modalHandler.exitSpan.onclick = function() {
@@ -15,7 +16,7 @@
     	},
 
 
-    	modal: document.getElementById('myModal'),
+    	modal: document.getElementById('modal'),
 
     	exitSpan: document.getElementsByClassName("jsclose")[0],
 

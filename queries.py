@@ -41,9 +41,9 @@ def get_cards_by_board_id(cursor, boardId):
 
 #-------------------------------------------------------------------------
 @database_common.connection_handler
-def update_card_status(cursor, card_id, status_id):
+def update_card_status(cursor, card_id, status_id, board_id):
     cursor.execute(''' 
-                        UPDATE cards SET status_id = {}
+                        UPDATE cards SET status_id = {}, board_id = {}
                         WHERE id = %s;
-    '''.format(status_id), (card_id,))
+    '''.format(status_id, board_id), (card_id,))
   
