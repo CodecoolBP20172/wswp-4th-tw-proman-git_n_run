@@ -1,5 +1,6 @@
 dom = {
 	showBoards: function() {
+		dataHandler
 		var targetBody = document.getElementById("body_id");
 		targetBody.innerHTML = ""
 		var newdiv = document.createElement("div");
@@ -10,7 +11,7 @@ dom = {
             <div class="col" id="title">Proman</div>
 			<div class="col"><form method="POST" action="/logout"><button class="btn btn-dark" id="logout_btn">
 			Log Out</button></form>
-			<button class="btn btn-dark" id="board_creator" onclick="dom.addBoard()">
+			<button class="btn btn-dark" id="board_creator" onclick="modalHandler.openAddBoardModal()">
 			Create board</button></div>
         </div>
         </div>
@@ -28,6 +29,11 @@ dom = {
                                 </div></div>`
 				targetWrapper.appendChild(newdiv)
 			}
+				targetWrapper.innerHTML += `
+
+
+
+				`
 		})
 	},
 
@@ -84,11 +90,10 @@ dom = {
 						if (cardList[card_id].status_id == targetStatus.id.slice(-1)) {
 							targetStatus.innerHTML += ` 
                                         <div ondrop="drag_and_drop.doNothing(event)" draggable="true" ondragstart="drag_and_drop.drag(event)" 
-                                        class="card" ondblclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})"
-                                        id=${cardList[card_id].id}>${cardList[card_id].title}
+                                        class="card" id=${cardList[card_id].id}>${cardList[card_id].title}
                                         <div id="edit_div">
 
-                                        <a href="#" id="edit_card_button" onclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})">
+                                        <a href="#" id="edit_card_button" onclick="modalHandler.openEditCardModal(${cardList[card_id].id}, ${cardList[card_id].board_id})">
                                         <i class="fa fa-pencil" id="edit_card_pencil" aria-hidden="true"></i>
                                         </a></div>
                                         </div>`
@@ -101,7 +106,7 @@ dom = {
 				var divForCreateButton = document.createElement("div"); //create a button to make a new task
 				divForCreateButton.setAttribute("data-create_button", "true");
 				divForCreateButton.innerHTML = `<button button class="btn btn-dark" id="create_new_task" 
-                                            onclick="dom.addNewCard(${boardId})">Create new task</button>`;
+                                            onclick="modalHandler.openAddCardModal(${boardId})">Create new task</button>`;
 				targetBoard.appendChild(divForCreateButton);
 			} else {
 				targetBoard = document.getElementById("board" + boardId);
@@ -126,8 +131,7 @@ dom = {
 	},
 
 
-	addBoard: function() {
-		var newBoardTitle = prompt("Please write your new board's name", "New board name");
+	addBoard: function(newBoardTitle) {
 		if (newBoardTitle == null || newBoardTitle == "") {
 			this.addBoard();
 		} else {
@@ -137,28 +141,17 @@ dom = {
 	},
 
 
-	addNewCard: function(boardId) {
-		var createdCardTitle = prompt("Please write your new card's name", "new card name");
-		if (createdCardTitle == null || createdCardTitle == "") {
-			this.editField(cardTitle, cardID);
-		} else {
-			dataHandler.createNewCard(createdCardTitle, boardId);
+	addNewCard: function(boardId, newCardTitle) {
+			dataHandler.createNewCard(newCardTitle, boardId);
 			this.showBoards();
 			this.showCards(boardId);
-		}
-
-	},
+		},
 
 
-	editField: function(cardId, cardBoardId) {
-		var newCardTitle = prompt("Editing Title", "cardTitle");
-		if (newCardTitle == null || newCardTitle == "") {
-			this.editField(cardTitle, cardID);
-		} else {
-			dataHandler.editCardTitle(cardId, newCardTitle);
-			this.showBoards();
-			this.showCards(cardBoardId);
-		}
+	editCard: function(cardId, cardBoardId, newCardTitle) {
+		dataHandler.editCardTitle(cardId, newCardTitle);
+		this.showBoards();
+		this.showCards(cardBoardId);
 	},
 	droppedOnCard: false
 

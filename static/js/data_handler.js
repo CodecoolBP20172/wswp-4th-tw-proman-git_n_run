@@ -96,8 +96,7 @@ dataHandler = {
                 window.location.href = returnValue;
             }
         })
-    },
-  
+    },  
     changeCardStatus: function(statusId, cardId){     
         $.ajax({
             url: '/update-card-status',
@@ -105,7 +104,8 @@ dataHandler = {
             type: "POST",
             data: {
                 'id': cardId,
-                'status_id': parseInt(statusId.slice(-1))
+                'status_id': parseInt(statusId.slice(-1)),
+                'board_id': statusId.charAt(0)
             },
             success: function(){
                 var card = document.getElementById(cardId)
