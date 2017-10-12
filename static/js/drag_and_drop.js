@@ -10,7 +10,9 @@ drag_and_drop = {
     drop: function(ev) {
         ev.preventDefault();
         var cardId = ev.dataTransfer.getData("cardId");
+        console.log(ev.target.id)
         if (ev.target.id.includes("status_id") === true ) {
+            console.log("true")
             dataHandler.changeCardStatus(ev.target.id, cardId);
             document.getElementById(ev.target.id).appendChild(document.getElementById(cardId))
         }

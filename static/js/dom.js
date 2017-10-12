@@ -9,18 +9,20 @@ dom = {
 		newdiv.innerHTML = `
         <div class="row" id="header">
             <div class="col" id="title">Proman</div>
-			<div class="col"><form method="POST" action="/logout"><button class="btn btn-dark" id="logout_btn">
-			Log Out</button></form>
-			<button class="btn btn-dark" id="board_creator" onclick="modalHandler.openAddBoardModal()">
-			Create board</button></div>
+            <div class="col"><button class="btn btn-dark" id="board_creator" onclick="modalHandler.openAddBoardModal()">Create board</button></div>
         </div>
         </div>
         `
 		targetBody.appendChild(newdiv);
 		var targetWrapper = document.getElementById("wrapper")
 		var newdiv = document.createElement("div");
+		newdiv.setAttribute("id", "board_container")
 		dataHandler.getBoards(function(tablelist) {
 			console.log(tablelist)
+			//-------------if length 0 smply add a new div
+			if (tablelist.length === 0){
+				targetWrapper.appendChild(newdiv)
+			}else{
 			for (let i = 0; i < tablelist.length; i++) {
 				newdiv.innerHTML += `<div class="container" id="board${tablelist[i].id}" board>
                                 <div class="row">
@@ -28,12 +30,8 @@ dom = {
                                 <div onclick="dom.showCards(${tablelist[i].id})" class="col" id="drop_down_button">▼</div>
                                 </div></div>`
 				targetWrapper.appendChild(newdiv)
+				}
 			}
-				targetWrapper.innerHTML += `
-
-
-
-				`
 		})
 	},
 
@@ -136,15 +134,33 @@ dom = {
 			this.addBoard();
 		} else {
 			dataHandler.createNewBoard(newBoardTitle);
-			this.showBoards();
-		}
+			dataHandler.getMaxBoardId(function(maximumId){
+				var board_container = document.getElementById("board_container")
+				board_container.innerHTML += `
+								<div class="container" id="board${maximumId}" board="">
+                                <div class="row">
+                                <div class="col" id="board_title">${newBoardTitle}</div>
+                                <div onclick="dom.showCards(${maximumId})" class="col" id="drop_down_button">▼</div>
+                                </div></div>
+			`
+		})
+	}
 	},
 
 
 	addNewCard: function(boardId, newCardTitle) {
 			dataHandler.createNewCard(newCardTitle, boardId);
-			this.showBoards();
-			this.showCards(boardId);
+			dataHandler.getMaxCardId(function(maximumId){
+				var status_area = document.getElementById(`${boardId}status_id1`)
+				status_area.innerHTML +=  `<div ondrop="drag_and_drop.doNothing(event)" draggable="true" ondragstart="drag_and_drop.drag(event)" class="card" id=${maximumId}>${newCardTitle}
+                                        <div id="edit_div">
+
+                                        <a href="#" id="edit_card_button" onclick="modalHandler.openEditCardModal(${maximumId} , ${boardId})">
+                                        <i class="fa fa-pencil" id="edit_card_pencil" aria-hidden="true"></i>
+                                        </a></div>
+                                        </div>
+										`
+										}) 
 		},
 
 
