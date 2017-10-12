@@ -9,20 +9,40 @@
     <title>ProMan</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/modal.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/modal.js') }}" defer><script>
     <script src="{{ url_for('static', filename='js/sample_data.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/data_handler.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/dom.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
     <script src="{{ url_for('static', filename='js/drag_and_drop.js') }}" defer></script>
     <script src="https://use.fontawesome.com/e8e5e96a13.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
     <div class="body_class" id = "body_id">
         </div>
-    </div>
+        </div>
+					<div id="myModal" class="jsmodal">
+
+					<div class="jsmodal-content">
+						<span class="jsclose">&times;</span>
+						<div id="modal_input_field">
+                                    <div>
+                        <h6> Please give a name </h6>
+                        </div>
+                        <div>
+                        <input id="input_value"></input> 
+                        <button id="modal_input_button">Create</button>
+                        </div>
+                        <div>
+                        <p id="error_message"></p>
+                        </div>
+                        </div>
+					</div>
 </body>
 
 </html>
