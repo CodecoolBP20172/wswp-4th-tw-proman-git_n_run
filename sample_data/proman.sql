@@ -39,12 +39,12 @@ INSERT INTO users VALUES (0, 'kutya', '$2b$12$XVXxvNO9SK4Rbec/xO/Nd.cTvVb62xU/iR
 SELECT pg_catalog.setval('users_id_seq', 1, true);
 
 
-INSERT INTO boards VALUES (0,'Kutya Tabla', 0);
-INSERT INTO boards VALUES (1,'Macska Tabla', 0);
+INSERT INTO boards VALUES (1000,'Kutya Tabla', 0);
+INSERT INTO boards VALUES (1001,'Macska Tabla', 0);
 
-SELECT pg_catalog.setval('boards_id_seq', 2, true);
+SELECT pg_catalog.setval('boards_id_seq', 1002, true);
 
-INSERT INTO cards VALUES (0, 0, 1, 'Kutyaélet');
-INSERT INTO cards VALUES (1, 0, 2, 'Kutyahalál');
+INSERT INTO cards VALUES (0, 1000, 1, 'Kutyaélet');
+INSERT INTO cards VALUES (1, 1000, 2, 'Kutyahalál');
 
 SELECT pg_catalog.setval('cards_id_seq', 2, true);

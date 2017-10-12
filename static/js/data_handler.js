@@ -126,9 +126,11 @@ dataHandler = {
             data: {
                 'id': cardId,
                 'status_id': parseInt(statusId.slice(-1)),
-                'board_id': statusId.charAt(0)
+                'board_id': parseInt(statusId.substring(0, 4))
             },
             success: function(){
+                console.log("success")
+                console.log("in datahandler" + statusId)
                 var card = document.getElementById(cardId)
                 var status = document.getElementById(statusId)
                 status.appendChild(card)
