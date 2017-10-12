@@ -96,7 +96,28 @@ dataHandler = {
                 window.location.href = returnValue;
             }
         })
-    },  
+    },
+        getMaxBoardId : function(callback){
+            $.ajax({                            
+                url: `/get-max-board-id`,                  
+                dataType : "json",
+                type: "GET",
+                success : function(maximumId){
+                    callback(maximumId)
+                }
+            })
+       },
+        getMaxCardId : function(callback){
+            $.ajax({                            
+                url: `/get-max-card-id`,                  
+                dataType : "json",
+                type: "GET",
+                success : function(maximumId){
+                    callback(maximumId)
+                }
+            })
+       },
+
     changeCardStatus: function(statusId, cardId){     
         $.ajax({
             url: '/update-card-status',
@@ -112,6 +133,7 @@ dataHandler = {
                 var status = document.getElementById(statusId)
                 status.appendChild(card)
             }
+            
         })        
     }
 }

@@ -59,3 +59,20 @@ def update_card_status(cursor, card_id, status_id, board_id):
                         WHERE id = %s;
     '''.format(status_id, board_id), (card_id,))
 
+
+@database_common.connection_handler
+def get_maximum_card_id(cursor):
+    cursor.execute('''SELECT MAX(id)
+                      FROM cards;
+                      ''')
+    maximumid = cursor.fetchall()
+    return maximumid
+
+
+@database_common.connection_handler
+def get_maximum_board_id(cursor):
+    cursor.execute('''SELECT MAX(id)
+                      FROM boards;
+                      ''')
+    maximumid = cursor.fetchall()
+    return maximumid
