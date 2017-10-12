@@ -31,6 +31,25 @@ div[board] {
     border-width: 2px;
     border-color: #FF9718;
     float: right;
+    margin-left: 10px;
+}
+
+#logout_btn {
+    color: rgba(255, 0, 0, 0.68);
+    background: #222;
+    border-width: 2px;
+    border-color: rgba(255, 0, 0, 0.68);
+    float: right;
+    margin-left: 10px;
+}
+
+#board_creator {
+    color: #FF9718;
+    background: #222;
+    border-width: 2px;
+    border-color: #FF9718;
+    float: right;
+    margin-left: 10px;
 }
 
 #board_title {
