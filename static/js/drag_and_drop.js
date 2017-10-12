@@ -12,6 +12,7 @@ drag_and_drop = {
         var cardId = ev.dataTransfer.getData("cardId");
         if (ev.target.id.includes("status_id") === true ) {
             dataHandler.changeCardStatus(ev.target.id, cardId);
+            document.getElementById(ev.target.id).appendChild(document.getElementById(cardId))
         }
         //else {
         //    dom.droppedOnCard = false

@@ -59,9 +59,9 @@ dataHandler = {
             },
         })
     },
-        // creates new card for the given board, saves it and returns its id
-        editCardTitle: function(cardID, newCardTitle) {
-            $.ajax({
+    // creates new card for the given board, saves it and returns its id
+    editCardTitle: function(cardID, newCardTitle) {
+        $.ajax({
             url: '/edit-card-title',
             dataType: 'json',
             type: "POST",
@@ -70,13 +70,35 @@ dataHandler = {
                 'title': newCardTitle
             }
         })
+    },    
+    sendLogin: function(){                    //sending data to server.py
+        $.ajax({ 
+            url: '/login',                //function route to give the data to
+            type: 'POST',                       //methods =['POST'] must be added to the function in the server.py
+            data: {                             //data must be an object a json format object
+                'username': $( '#username_input' ).val(),    //getting input field value
+                'password': $( '#password_input' ).val(),                 //giving static information
+            },
+            success: function(returnValue){                //on success function
+                window.location.href = returnValue;
+            }
+        })
     },
-    sayhello: function(){
-        console.log("hello")
-    },
-    
-        changeCardStatus: function(statusId, cardId, board_id){     
-            $.ajax({
+    sendRegister: function(){                    //sending data to server.py
+        $.ajax({ 
+            url: '/register',                //function route to give the data to
+            type: 'POST',                       //methods =['POST'] must be added to the function in the server.py
+            data: {                             //data must be an object a json format object
+                'username': $( '#create_username_input' ).val(),    //getting input field value
+                'password': $( '#create_password_input' ).val(),                 //giving static information
+            },
+            success: function(returnValue){                //on success function
+                window.location.href = returnValue;
+            }
+        })
+    },  
+    changeCardStatus: function(statusId, cardId){     
+        $.ajax({
             url: '/update-card-status',
             dataType: 'json',
             type: "POST",
@@ -91,5 +113,5 @@ dataHandler = {
                 status.appendChild(card)
             }
         })        
-}
+    }
 }
