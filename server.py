@@ -104,9 +104,9 @@ def get_cards_by_board_id(boardId):
 
 @app.route("/update-card-status", methods=["POST"])
 def update_card_status():
-    update_card_status = extract_form()
-    queries.update_card_status(update_card_status['id'], update_card_status['status_id'])
-    return "1"
+    update_card_status= extract_form()
+    queries.update_card_status(update_card_status['id'], update_card_status['status_id'], update_card_status['board_id'])
+    return "asd"
 
 
 def extract_form():
