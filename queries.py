@@ -1,5 +1,4 @@
 import database_common
-import server
 
 
 @database_common.connection_handler
