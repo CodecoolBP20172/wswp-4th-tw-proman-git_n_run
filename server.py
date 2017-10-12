@@ -17,12 +17,21 @@ def extract_form():
 
 @app.route("/")
 def index():
-    return render_template("boards.html")
+    try:
+        if session["logged_in"] is True:
+            return render_template("boards.html")
+        else:
+            return redirect("/login-page")          
+    except KeyError:
+        return redirect("/login-page")
 
 
 @app.route('/login-page')
 def route_login_page():
-    return render_template('login.html')
+    if session["logged_in"] is True:
+        return redirect("/")
+    else:
+        return render_template('login.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -43,6 +52,12 @@ def log_in():
     else:
         flash("Wrong username or password")
         return "/login-page"
+
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    session['logged_in'] = False
+    return redirect('/login-page')
 
 
 @app.route('/register-page')
@@ -72,7 +87,7 @@ def register():
 @app.route("/create-new-board", methods=['POST'])
 def add_board():
     board_title_dict = extract_form()
-    queries.create_new_board(board_title_dict['title'])
+    queries.create_new_board(board_title_dict['title'], session_id=session['id'])
     return('asd')
 
 
@@ -92,7 +107,7 @@ def edit_card_title():
 
 @app.route("/get-boards")
 def get_boards():
-    boards = queries.get_boards()
+    boards = queries.get_boards(session_id=session['id'])
     return jsonify(boards)
 
 
@@ -114,8 +129,8 @@ def extract_form():
     form_dict = {}
     for item in form_input.items():
         form_dict[item[0]] = item[1]
-
     return form_dict
+
 
 if __name__ == "__main__":
     app.secret_key = "proman"
