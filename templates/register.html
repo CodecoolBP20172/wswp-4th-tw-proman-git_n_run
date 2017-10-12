@@ -28,19 +28,21 @@
             <p>Username</p>
             <input type="username" id="create_username_input" name="username" placeholder="choose username">
             <p>Password</p>
+            
             <input type="password" id="create_password_input" name="password" placeholder="choose password">
             <br><br>
-            <button id="register_button" class="btn btn-dark" type="submit" value="Register" onclick="dataHandler.sendRegister()">Register</button>            
-    
             <div>
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         {%for message in messages %}
-                            <p style="color:white; font-size: 20px;" id="error_message">{{message}}</p>
+                            <p id="error_message">{{message}}</p>
                         {%endfor%}
                     {%endif%}
                 {%endwith%}
             </div>
+            <button id="register_button" class="btn btn-dark" type="submit" value="Register" onclick="dataHandler.sendRegister()">Register</button>            
+    
+            
 
         </div>
         
