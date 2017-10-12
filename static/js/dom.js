@@ -87,11 +87,10 @@ dom = {
 						if (cardList[card_id].status_id == targetStatus.id.slice(-1)) {
 							targetStatus.innerHTML += ` 
                                         <div ondrop="drag_and_drop.doNothing(event)" draggable="true" ondragstart="drag_and_drop.drag(event)" 
-                                        class="card" ondblclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})"
-                                        id=${cardList[card_id].id}>${cardList[card_id].title}
+                                        class="card" id=${cardList[card_id].id}>${cardList[card_id].title}
                                         <div id="edit_div">
 
-                                        <a href="#" id="edit_card_button" onclick="dom.editField(${cardList[card_id].id}, ${cardList[card_id].board_id})">
+                                        <a href="#" id="edit_card_button" onclick="modalHandler.openEditCardModal(${cardList[card_id].id}, ${cardList[card_id].board_id})">
                                         <i class="fa fa-pencil" id="edit_card_pencil" aria-hidden="true"></i>
                                         </a></div>
                                         </div>`
@@ -146,15 +145,10 @@ dom = {
 		},
 
 
-	editCard: function(cardId, cardBoardId) {
-		var newCardTitle = prompt("Editing Title", "cardTitle");
-		if (newCardTitle == null || newCardTitle == "") {
-			this.editField(cardTitle, cardID);
-		} else {
-			dataHandler.editCardTitle(cardId, newCardTitle);
-			this.showBoards();
-			this.showCards(cardBoardId);
-		}
+	editCard: function(cardId, cardBoardId, newCardTitle) {
+		dataHandler.editCardTitle(cardId, newCardTitle);
+		this.showBoards();
+		this.showCards(cardBoardId);
 	},
 	droppedOnCard: false
 
