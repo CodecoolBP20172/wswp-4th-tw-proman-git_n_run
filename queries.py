@@ -1,4 +1,5 @@
 import database_common
+import server
 
 
 @database_common.connection_handler
@@ -20,17 +21,17 @@ def add_user(cursor, list_to_write):
 
 
 @database_common.connection_handler
-def get_boards(cursor):
-    cursor.execute('SELECT * FROM boards;')
+def get_boards(cursor, session_id):
+    cursor.execute('SELECT * FROM boards WHERE user_id = %s;', (str(session_id), ))
     boards = cursor.fetchall()
     return boards
 
 
 @database_common.connection_handler
-def create_new_board(cursor, board_title):
+def create_new_board(cursor, board_title, session_id):
     cursor.execute('''
-        INSERT INTO boards (title, user_id) VALUES (%s, 0)
-    ''', (board_title,))
+        INSERT INTO boards (title, user_id) VALUES (%s, %s)
+    ''', (board_title, str(session_id)))
 
 
 @database_common.connection_handler

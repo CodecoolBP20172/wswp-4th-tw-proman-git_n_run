@@ -8,7 +8,10 @@ dom = {
 		newdiv.innerHTML = `
         <div class="row" id="header">
             <div class="col" id="title">Proman</div>
-            <div class="col"><button class="btn btn-dark" id="board_creator" onclick="dom.addBoard()">Create board</button></div>
+			<div class="col"><form method="POST" action="/logout"><button class="btn btn-dark" id="logout_btn">
+			Log Out</button></form>
+			<button class="btn btn-dark" id="board_creator" onclick="dom.addBoard()">
+			Create board</button></div>
         </div>
         </div>
         `
