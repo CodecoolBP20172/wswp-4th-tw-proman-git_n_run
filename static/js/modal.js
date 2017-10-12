@@ -2,17 +2,17 @@
     	initModal: function() {
     		$("#modal_error_message").html();
     		$('#modal_input_value').val("")
-            $('#modal_input_value').attr("placeholder", "");
+    		$('#modal_input_value').attr("placeholder", "");
     		modalHandler.modal.style.display = "block"
 
     		modalHandler.exitSpan.onclick = function() {
     				modalHandler.modal.style.display = "none";
     			},
-    		window.onclick = function(event) {
-    		if (event.target == modalHandler.modal) {
-    			modalHandler.modal.style.display = "none";
-    		    }
-    		}
+    			window.onclick = function(event) {
+    				if (event.target == modalHandler.modal) {
+    					modalHandler.modal.style.display = "none";
+    				}
+    			}
     	},
 
 

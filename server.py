@@ -21,7 +21,7 @@ def index():
         if session["logged_in"] is True:
             return render_template("boards.html")
         else:
-            return redirect("/login-page")          
+            return redirect("/login-page")
     except KeyError:
         return redirect("/login-page")
 
@@ -81,6 +81,7 @@ def register():
             queries.add_user(form_value)
             return "/login-page"
         else:
+            flash("The username is already in use!")
             return "/register-page"
     else:
         flash("Username and password must be filled!")
@@ -91,21 +92,21 @@ def register():
 def add_board():
     board_title_dict = extract_form()
     queries.create_new_board(board_title_dict['title'], session_id=session['id'])
-    return('asd')
+    return "success"
 
 
 @app.route("/create-new-card", methods=['POST'])
 def create_new_card():
     card_title_dict = extract_form()
     queries.create_new_card(card_title_dict['board_id'], card_title_dict['title'])
-    return('apacukas')
+    return "success"
 
 
 @app.route("/edit-card-title", methods=['POST'])
 def edit_card_title():
     edit_card_title_dict = extract_form()
     queries.edit_card_title(edit_card_title_dict['id'], edit_card_title_dict['title'])
-    return('apacukas')
+    return "success"
 
 
 @app.route("/get-boards")
@@ -123,22 +124,19 @@ def get_cards_by_board_id(boardId):
 @app.route("/update-card-status", methods=["POST"])
 def update_card_status():
     update_card_status = extract_form()
-    print(update_card_status)
     queries.update_card_status(update_card_status['id'], update_card_status['status_id'], update_card_status['board_id'])
-    return "asd"
+    return "success"
 
 
 @app.route("/get-max-board-id")
 def get_maximum_board_id():
     maximum_id_dict_list = queries.get_maximum_board_id()
-    print(maximum_id_dict_list)
     return str(maximum_id_dict_list[0]['max'])
 
 
 @app.route("/get-max-card-id")
 def get_maximum_card_id():
     maximum_id_dict_list = queries.get_maximum_card_id()
-    print(maximum_id_dict_list)
     return str(maximum_id_dict_list[0]['max'])
 
 

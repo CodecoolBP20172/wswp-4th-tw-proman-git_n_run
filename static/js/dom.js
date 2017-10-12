@@ -7,29 +7,31 @@ dom = {
 		newdiv.setAttribute("class", "container")
 		newdiv.setAttribute("id", "wrapper")
 		newdiv.innerHTML = `
-        <div class="row" id="header">
-            <div class="col" id="title">Proman</div>
-            <div class="col"><button class="btn btn-dark" id="board_creator" onclick="modalHandler.openAddBoardModal()">Create board</button></div>
-        </div>
-        </div>
+							<div class="row" id="header">
+							<div class="col" id="title">Proman</div>
+							<div class="col"><form method="POST" action="/logout"><button class="btn btn-dark" id="logout_btn">
+							Log Out</button></form>
+							<div class="col"><button class="btn btn-dark" id="board_creator" onclick="modalHandler.openAddBoardModal()">Create board</button></div>
+							</div>
+							</div>
         `
 		targetBody.appendChild(newdiv);
 		var targetWrapper = document.getElementById("wrapper")
 		var newdiv = document.createElement("div");
 		newdiv.setAttribute("id", "board_container")
 		dataHandler.getBoards(function(tablelist) {
-			console.log(tablelist)
-			//-------------if length 0 smply add a new div
-			if (tablelist.length === 0){
+			if (tablelist.length === 0) {
 				targetWrapper.appendChild(newdiv)
-			}else{
-			for (let i = 0; i < tablelist.length; i++) {
-				newdiv.innerHTML += `<div class="container" id="board${tablelist[i].id}" board>
-                                <div class="row">
-                                <div class="col" id="board_title">${tablelist[i].title}</div>
-                                <div onclick="dom.showCards(${tablelist[i].id})" class="col" id="drop_down_button">▼</div>
-                                </div></div>`
-				targetWrapper.appendChild(newdiv)
+			} else {
+				for (let i = 0; i < tablelist.length; i++) {
+					newdiv.innerHTML += `
+										<div class="container" id="board${tablelist[i].id}" board>
+										<div class="row">
+										<div class="col" id="board_title">${tablelist[i].title}</div>
+										<div onclick="dom.showCards(${tablelist[i].id})" class="col" id="drop_down_button">▼</div>
+										</div>
+										</div>`
+					targetWrapper.appendChild(newdiv)
 				}
 			}
 		})
@@ -46,39 +48,36 @@ dom = {
 				}
 			}
 
-
 			if (isBoardOpened == false) {
 				var tableDiv = document.createElement("div");
 				tableDiv.setAttribute("class", "row");
 				tableDiv.setAttribute("data-table", "true");
 
-
-
 				tableDiv.innerHTML = `
-                <div name="status_new" id="status_new" class="col"> New </div>
-                <div name="status_progress" id="status_progress" class="col"> In Progress</div>
-                <div name="status_testing" id="status_testing" class="col"> Testing </div>
-                <div name="status_done" id="status_done" class="col"> Done </div>`
+									<div name="status_new" id="status_new" class="col"> New </div>
+									<div name="status_progress" id="status_progress" class="col"> In Progress</div>
+									<div name="status_testing" id="status_testing" class="col"> Testing </div>
+									<div name="status_done" id="status_done" class="col"> Done </div>
+									`
 				targetBoard.appendChild(tableDiv);
-
 
 				var areaDiv = document.createElement("div");
 				areaDiv.setAttribute("class", "row");
 				areaDiv.setAttribute("data-area", "true");
 				areaDiv.innerHTML = `
-                <div ondrop="drag_and_drop.drop(event)" ondragover="drag_and_drop.allowDrop(event)" 
-                name="area_new" id="${boardId}status_id1" class="col" area_new></div>
+									<div ondrop="drag_and_drop.drop(event)" ondragover="drag_and_drop.allowDrop(event)" 
+									name="area_new" id="${boardId}status_id1" class="col" area_new></div>
 
-                <div ondrop="drag_and_drop.drop(event)" ondragover="drag_and_drop.allowDrop(event)" 
-                name="area_progress" id="${boardId}status_id2" class="col" area_progress></div>
+									<div ondrop="drag_and_drop.drop(event)" ondragover="drag_and_drop.allowDrop(event)" 
+									name="area_progress" id="${boardId}status_id2" class="col" area_progress></div>
 
-                <div ondrop="drag_and_drop.drop(event)" ondragover="drag_and_drop.allowDrop(event)" 
-                name="area_testing" id="${boardId}status_id3" class="col" area_testing></div>
+									<div ondrop="drag_and_drop.drop(event)" ondragover="drag_and_drop.allowDrop(event)" 
+									name="area_testing" id="${boardId}status_id3" class="col" area_testing></div>
 
-                <div ondrop="drag_and_drop.drop(event)" ondragover="drag_and_drop.allowDrop(event)" 
-                name="area_done" id="${boardId}status_id4" class="col" area_done></div>
-                </div>
-        `
+									<div ondrop="drag_and_drop.drop(event)" ondragover="drag_and_drop.allowDrop(event)" 
+									name="area_done" id="${boardId}status_id4" class="col" area_done></div>
+									</div>
+        							`
 				targetBoard.appendChild(areaDiv);
 				var newcard = document.createElement("div");
 				for (let statusid = 1; statusid < 5; statusid++) {
@@ -87,14 +86,15 @@ dom = {
 						newcard.innerHTML = cardList[card_id].title
 						if (cardList[card_id].status_id == targetStatus.id.slice(-1)) {
 							targetStatus.innerHTML += ` 
-                                        <div ondrop="drag_and_drop.doNothing(event)" draggable="true" ondragstart="drag_and_drop.drag(event)" 
-                                        class="card" id=${cardList[card_id].id}>${cardList[card_id].title}
-                                        <div id="edit_div">
-
-                                        <a href="#" id="edit_card_button" onclick="modalHandler.openEditCardModal(${cardList[card_id].id}, ${cardList[card_id].board_id})">
-                                        <i class="fa fa-pencil" id="edit_card_pencil" aria-hidden="true"></i>
-                                        </a></div>
-                                        </div>`
+													<div ondrop="drag_and_drop.doNothing(event)" draggable="true" ondragstart="drag_and_drop.drag(event)" 
+													class="card" id=${cardList[card_id].id}>${cardList[card_id].title}
+													<div id="edit_div">
+													<a href="#" id="edit_card_button" 
+													onclick="modalHandler.openEditCardModal(${cardList[card_id].id}, ${cardList[card_id].board_id})">
+													<i class="fa fa-pencil" id="edit_card_pencil" aria-hidden="true"></i>
+													</a></div>
+													</div>
+													`
 						}
 					}
 				}
@@ -103,8 +103,10 @@ dom = {
 				targetBoard = document.getElementById("board" + boardId);
 				var divForCreateButton = document.createElement("div"); //create a button to make a new task
 				divForCreateButton.setAttribute("data-create_button", "true");
-				divForCreateButton.innerHTML = `<button button class="btn btn-dark" id="create_new_task" 
-                                            onclick="modalHandler.openAddCardModal(${boardId})">Create new task</button>`;
+				divForCreateButton.innerHTML = `
+												<button button class="btn btn-dark" id="create_new_task" 
+                                            	onclick="modalHandler.openAddCardModal(${boardId})">Create new task</button>
+												`;
 				targetBoard.appendChild(divForCreateButton);
 			} else {
 				targetBoard = document.getElementById("board" + boardId);
@@ -134,25 +136,27 @@ dom = {
 			this.addBoard();
 		} else {
 			dataHandler.createNewBoard(newBoardTitle);
-			dataHandler.getMaxBoardId(function(maximumId){
+			dataHandler.getMaxBoardId(function(maximumId) {
 				var board_container = document.getElementById("board_container")
 				board_container.innerHTML += `
-								<div class="container" id="board${maximumId}" board="">
-                                <div class="row">
-                                <div class="col" id="board_title">${newBoardTitle}</div>
-                                <div onclick="dom.showCards(${maximumId})" class="col" id="drop_down_button">▼</div>
-                                </div></div>
-			`
-		})
-	}
+												<div class="container" id="board${maximumId}" board="">
+												<div class="row">
+												<div class="col" id="board_title">${newBoardTitle}</div>
+												<div onclick="dom.showCards(${maximumId})" class="col" id="drop_down_button">▼</div>
+												</div>
+												</div>
+											`
+			})
+		}
 	},
 
 
 	addNewCard: function(boardId, newCardTitle) {
-			dataHandler.createNewCard(newCardTitle, boardId);
-			dataHandler.getMaxCardId(function(maximumId){
-				var status_area = document.getElementById(`${boardId}status_id1`)
-				status_area.innerHTML +=  `<div ondrop="drag_and_drop.doNothing(event)" draggable="true" ondragstart="drag_and_drop.drag(event)" class="card" id=${maximumId}>${newCardTitle}
+		dataHandler.createNewCard(newCardTitle, boardId);
+		dataHandler.getMaxCardId(function(maximumId) {
+			var status_area = document.getElementById(`${boardId}status_id1`)
+			status_area.innerHTML += `
+										<div ondrop="drag_and_drop.doNothing(event)" draggable="true" ondragstart="drag_and_drop.drag(event)" class="card" id=${maximumId}>${newCardTitle}
                                         <div id="edit_div">
 
                                         <a href="#" id="edit_card_button" onclick="modalHandler.openEditCardModal(${maximumId} , ${boardId})">
@@ -160,8 +164,8 @@ dom = {
                                         </a></div>
                                         </div>
 										`
-										}) 
-		},
+		})
+	},
 
 
 	editCard: function(cardId, cardBoardId, newCardTitle) {

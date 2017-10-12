@@ -1,27 +1,21 @@
 drag_and_drop = {
-    allowDrop: function(ev) {
-    ev.preventDefault();
-    },
+	allowDrop: function(ev) {
+		ev.preventDefault();
+	},
 
-    drag: function(ev) {
-        ev.dataTransfer.setData("cardId", ev.target.id);
-    },
+	drag: function(ev) {
+		ev.dataTransfer.setData("cardId", ev.target.id);
+	},
 
-    drop: function(ev) {
-        ev.preventDefault();
-        var cardId = ev.dataTransfer.getData("cardId");
-        console.log(ev.target.id)
-        if (ev.target.id.includes("status_id") === true ) {
-            console.log("true")
-            dataHandler.changeCardStatus(ev.target.id, cardId);
-            document.getElementById(ev.target.id).appendChild(document.getElementById(cardId))
-        }
-        //else {
-        //    dom.droppedOnCard = false
-        //    dom.showCards(dataHandler.getCard(parseInt(cardId)).board_id)
-        //}
-    },    
-    doNothing: function(ev) {
-        dom.droppedOnCard = true;
-    },
-    }
+	drop: function(ev) {
+		ev.preventDefault();
+		var cardId = ev.dataTransfer.getData("cardId");
+		if (ev.target.id.includes("status_id") === true) {
+			dataHandler.changeCardStatus(ev.target.id, cardId);
+			document.getElementById(ev.target.id).appendChild(document.getElementById(cardId))
+		}
+	},
+	doNothing: function(ev) {
+		dom.droppedOnCard = true;
+	},
+}
