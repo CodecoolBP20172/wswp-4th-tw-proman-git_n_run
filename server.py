@@ -122,9 +122,24 @@ def get_cards_by_board_id(boardId):
 
 @app.route("/update-card-status", methods=["POST"])
 def update_card_status():
-    update_card_status= extract_form()
+    update_card_status = extract_form()
+    print(update_card_status)
     queries.update_card_status(update_card_status['id'], update_card_status['status_id'], update_card_status['board_id'])
     return "asd"
+
+
+@app.route("/get-max-board-id")
+def get_maximum_board_id():
+    maximum_id_dict_list = queries.get_maximum_board_id()
+    print(maximum_id_dict_list)
+    return str(maximum_id_dict_list[0]['max'])
+
+
+@app.route("/get-max-card-id")
+def get_maximum_card_id():
+    maximum_id_dict_list = queries.get_maximum_card_id()
+    print(maximum_id_dict_list)
+    return str(maximum_id_dict_list[0]['max'])
 
 
 def extract_form():
