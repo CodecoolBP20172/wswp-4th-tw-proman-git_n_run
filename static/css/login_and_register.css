@@ -21,7 +21,7 @@ body {
     float: center;
 }
 
-#register_button, #registration_button, #login_button {
+#register_button, #registration_button, #login_button, #back_to_login_button {
     color: #FF9718;
     background: #222;
     border-width: 2px;

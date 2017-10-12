@@ -31,7 +31,9 @@
             <input type="password" id="create_password_input" name="password" placeholder="choose password">
             <br><br>
             <button id="register_button" class="btn btn-dark" type="submit" value="Register" onclick="dataHandler.sendRegister()">Register</button>            
-    
+            <form action='/login-page'>
+                <button id="back_to_login_button" class="btn btn-dark" type="submit" value="register">Go Back To Login Page</button>
+            </form>
             <div>
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
