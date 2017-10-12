@@ -4,65 +4,29 @@
 // (watch out: when you would like to use a property/function of an object from the
 // object itself then you must use the 'this' keyword before. For example: 'this.data' below)
 dataHandler = {
-    data: {}, // it contains the boards and their cards and statuses
-    loadTestData: function() {
-        localStorage.setItem('data', JSON.stringify(sampleData));
-        // uses sampleData from sample_data.js and puts it into the local storage
-        // it should be called only once on a test environment
-        // To use you have to import the sample_data.js file above this file in your html
-    },
 
-    loadData: function() {
-        return this.data = JSON.parse(localStorage.getItem('data'))
-        // loads data from local storage to this.data property
-        // this.data = ...
-    },
-    
-    saveData: function() {
-        localStorage.setItem('data', JSON.stringify(this.data))
-    },
-
-    getBoards: function() {
-        this.loadData()
-        return this.data.boards;
-        // returns the boards from this.data
-    },
-    getBoard: function(boardId) {
-        this.loadData()
-        for (var i = 0;i < this.getBoards().length; i++){
-            if (this.getBoards()[i].id == boardId){ 
-                return this.getBoards()[i];
+    getBoards: function(callback) {
+        $.ajax({                            
+        url: "/get-boards",                  
+        dataType : "json",
+        type: "GET",
+        success : function(boards){
+            callback(boards)
         }
-        }
-        // returns the board with the given id from this.data
+    })
     },
-
-    getStatuses: function() {
-        this.loadData()
-        return this.data.states;
-        // returns the statuses from this.data
-    },
-    
-    getStatus: function(statusId) {
-        for (var i = 0; i < this.getStatuses().length; i++){
-            if(this.getStatuses()[i].id === statusId){
-                return this.getStatuses()[i];
-            }
-        }
-        // returns the status with the given id from this.data
-    },
-
-    getCardsByBoardId: function(boardId) {
-        this.loadData();
-        var cardList = []
-        for (var i = 0; i < this.data.cards.length; i++){
-            if (this.data.cards[i].board_id === boardId){
-                cardList.push(this.data.cards[i])
-            }
-        }
-        return cardList
+    getCardsByBoardId: function(boardId, callback) {
+            $.ajax({                            
+            url: `/get-cards-by-board-id/${boardId}`,                  
+            dataType : "json",
+            type: "GET",
+            success : function(cardList){
+                callback(cardList)
+                }
+            })
         // returns the cards from this.data which has the given board id
-    },
+        },
+
     getCard: function(cardId) {
         this.loadData();
         for (var i = 0; i < this.data.cards.length; i++){
@@ -73,81 +37,81 @@ dataHandler = {
         // returns the card with the given id from this.data
     },
     createNewBoard: function(boardTitle) {
-        this.loadData();
-        var maximumId = 0
-        for (var i = 0; i < this.data.boards.length; i++){
-            console.log(this.data.boards[i])
-            if(this.data.boards[i].id > maximumId){
-                maximumId = this.data.boards[i].id
+        $.ajax({
+            url: '/create-new-board',
+            dataType: 'json',
+            type: "post",
+            data :{
+                'title': boardTitle
             }
-        }
-        this.data.boards.push({
-            'id': maximumId + 1,
-            'title':boardTitle
-        });
-        this.saveData();
+        })
         // creates new board, saves it and returns its id
     },
     createNewCard: function(cardTitle, boardId) {
-        this.loadData();
-        this.data.cards.push(
-                    {
-            "id": this.data.cards.length + 1,
-            "title": cardTitle,
-            "board_id": boardId,
-            "status_id": 1,
-            "order": 3
-        }
-        )
-        
-        this.saveData();
-        // creates new board, saves it and returns its id
+        $.ajax({
+            url: '/create-new-card',
+            dataType: 'json',
+            type: "POST",
+            data: {
+                'board_id': boardId,
+                'status_id': 1,
+                'title': cardTitle
+            },
+        })
     },
-        // creates new card for the given board, saves it and returns its id
-        editCardTitle: function(cardID, newCardTitle) {
-            this.loadData();
-            for (var i = 0; i <this.data.cards.length; i++){
-                console.log(this.data.cards[i])
-                console.log(cardID)
-                if (this.data.cards[i].id === cardID) {
-                    this.data.cards[i].title = newCardTitle;
-                }
+    // creates new card for the given board, saves it and returns its id
+    editCardTitle: function(cardID, newCardTitle) {
+        $.ajax({
+            url: '/edit-card-title',
+            dataType: 'json',
+            type: "POST",
+            data: {
+                'id': cardID,
+                'title': newCardTitle
             }
-            this.saveData();
-            // edits the title of the card
-        },
-        changeCardStatus: function(boardId, cardId){
-            this.loadData();
-            var cardToChange = this.getCard(parseInt(cardId));
-            cardToChange.status_id = parseInt(boardId.slice(-1));
-            this.saveData();
-            return cardToChange.board_id
-        },    
-        sendLogin: function(){                    //sending data to server.py
-            $.ajax({ 
-                url: '/login',                //function route to give the data to
-                type: 'POST',                       //methods =['POST'] must be added to the function in the server.py
-                data: {                             //data must be an object a json format object
-                    'username': $( '#username_input' ).val(),    //getting input field value
-                    'password': $( '#password_input' ).val(),                 //giving static information
-                },
-                success: function(returnValue){                //on success function
-                    window.location.href = returnValue;
-                }
-            })
-        },
-        sendRegister: function(){                    //sending data to server.py
-            $.ajax({ 
-                url: '/register',                //function route to give the data to
-                type: 'POST',                       //methods =['POST'] must be added to the function in the server.py
-                data: {                             //data must be an object a json format object
-                    'username': $( '#create_username_input' ).val(),    //getting input field value
-                    'password': $( '#create_password_input' ).val(),                 //giving static information
-                },
-                success: function(returnValue){                //on success function
-                    window.location.href = returnValue;
-                }
-            })
-        }
+        })
+    },    
+    sendLogin: function(){                    //sending data to server.py
+        $.ajax({ 
+            url: '/login',                //function route to give the data to
+            type: 'POST',                       //methods =['POST'] must be added to the function in the server.py
+            data: {                             //data must be an object a json format object
+                'username': $( '#username_input' ).val(),    //getting input field value
+                'password': $( '#password_input' ).val(),                 //giving static information
+            },
+            success: function(returnValue){                //on success function
+                window.location.href = returnValue;
+            }
+        })
+    },
+    sendRegister: function(){                    //sending data to server.py
+        $.ajax({ 
+            url: '/register',                //function route to give the data to
+            type: 'POST',                       //methods =['POST'] must be added to the function in the server.py
+            data: {                             //data must be an object a json format object
+                'username': $( '#create_username_input' ).val(),    //getting input field value
+                'password': $( '#create_password_input' ).val(),                 //giving static information
+            },
+            success: function(returnValue){                //on success function
+                window.location.href = returnValue;
+            }
+        })
+    },
+  
+    changeCardStatus: function(statusId, cardId){     
+        $.ajax({
+            url: '/update-card-status',
+            dataType: 'json',
+            type: "POST",
+            data: {
+                'id': cardId,
+                'status_id': parseInt(statusId.slice(-1))
+            },
+            success: function(){
+                var card = document.getElementById(cardId)
+                var status = document.getElementById(statusId)
+                status.appendChild(card)
+            }
+        })        
+    }
 }
-    // here comes more features
